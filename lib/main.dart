@@ -24,6 +24,16 @@ class MyApp extends StatelessWidget {
 
           return MaterialApp(
             title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.dark(
+                primary: Colors.white,
+                secondary: Colors.white,
+              ),
+              primarySwatch: Colors.deepPurple,
+              primaryColor: Color.fromRGBO(255, 255, 255, 1),
+              accentColor: Color.fromRGBO(255, 255, 255, 1),
+              // buttonTheme: ButtonThemeData(buttonColor: Colors.amber),
+            ),
             // themeMode: themeProvider.themeMode,
             // theme: MyThemes.lightTheme,
             // darkTheme: MyThemes.darkTheme,
