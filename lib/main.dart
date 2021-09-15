@@ -1,4 +1,5 @@
 import 'package:app_global_heroes/pages/splash_page.dart';
+import 'package:app_global_heroes/widgets/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
             // themeMode: themeProvider.themeMode,
             // theme: MyThemes.lightTheme,
             // darkTheme: MyThemes.darkTheme,
-            home: SplashPage(),
+            home: SplashWidget(),
             debugShowCheckedModeBanner: false,
           );
         },

@@ -7,7 +7,15 @@ class SplashLoadingWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          LinearProgressIndicator(),
+          Expanded(
+            child: Container(
+              color: Color.fromRGBO(15, 32, 38, 1),
+              child: Image.asset(
+                "assets/splash.gif",
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
         ],
       ),
     );
