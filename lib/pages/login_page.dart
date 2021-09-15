@@ -25,14 +25,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-      ),
-      body: Form(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+      body: Container(
+        padding: EdgeInsets.all(30),
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(15, 32, 38, 1),
+        ),
+        child: Form(
           child: Column(
             children: [
+              Container(
+                child: Image.asset(
+                  "assets/logo.png",
+                  fit: BoxFit.contain,
+                ),
+              ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Email'),
                 onChanged: (texto) => email = texto,
@@ -42,41 +48,49 @@ class _LoginPageState extends State<LoginPage> {
                 obscureText: true,
                 onChanged: (texto) => senha = texto,
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  try {
-                    await userController.login(email, senha);
-                  } on FirebaseAuthException catch (e) {
-                    var msg = "";
+              Container(
+                margin: EdgeInsets.only(top: 30),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      await userController.login(email, senha);
+                    } on FirebaseAuthException catch (e) {
+                      var msg = "";
 
-                    if (e.code == "wrong-password") {
-                      msg = "A senha está incorreta";
-                    } else if (e.code == "invalid-email") {
-                      msg = "Email inválido";
-                    } else {
-                      msg = "Ocorreu um erro";
+                      if (e.code == "wrong-password") {
+                        msg = "A senha está incorreta";
+                      } else if (e.code == "invalid-email") {
+                        msg = "Email inválido";
+                      } else {
+                        msg = "Ocorreu um erro";
+                      }
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(msg),
+                        ),
+                      );
                     }
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(msg),
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 30),
+                    child: Text("Login"),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: OutlinedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignupPage(),
                       ),
                     );
-                  }
-                },
-                child: Text("Login"),
-              ),
-              Text("OU"),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SignupPage(),
-                    ),
-                  );
-                },
-                child: Text("Criar conta"),
+                  },
+                  child: Text("Criar conta"),
+                ),
               )
             ],
           ),
