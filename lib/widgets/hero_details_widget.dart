@@ -18,58 +18,48 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+          Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        height: 180,
-                        child: Image.network(
-                          widget.hero.imagem,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
+              Expanded(
+                child: Image.network(
+                  widget.hero.imagem,
+                  fit: BoxFit.cover,
+                  height: 280,
                 ),
               ),
-              PowerstatsWidget(
-                status: 'Poder',
-                valor: widget.hero.power,
-                progressoCor: Colors.redAccent,
-              ),
-              PowerstatsWidget(
-                status: 'Inteligência',
-                valor: widget.hero.intelligence,
-                progressoCor: Colors.blueAccent,
-              ),
-              PowerstatsWidget(
-                status: 'Velocidade',
-                valor: widget.hero.speed,
-                progressoCor: Colors.greenAccent,
-              ),
-              PowerstatsWidget(
-                status: 'Força',
-                valor: widget.hero.strength,
-                progressoCor: Colors.purpleAccent,
-              ),
-              PowerstatsWidget(
-                status: 'Combate',
-                valor: widget.hero.combat,
-                progressoCor: Colors.orangeAccent,
-              ),
-              PowerstatsWidget(
-                status: 'Durabilidade',
-                valor: widget.hero.durability,
-                progressoCor: Colors.amberAccent,
-              ),
             ],
+          ),
+          PowerstatsWidget(
+            status: 'Poder',
+            valor: widget.hero.power,
+            progressoCor: Colors.redAccent,
+          ),
+          PowerstatsWidget(
+            status: 'Inteligência',
+            valor: widget.hero.intelligence,
+            progressoCor: Colors.blueAccent,
+          ),
+          PowerstatsWidget(
+            status: 'Velocidade',
+            valor: widget.hero.speed,
+            progressoCor: Colors.greenAccent,
+          ),
+          PowerstatsWidget(
+            status: 'Força',
+            valor: widget.hero.strength,
+            progressoCor: Colors.purpleAccent,
+          ),
+          PowerstatsWidget(
+            status: 'Combate',
+            valor: widget.hero.combat,
+            progressoCor: Colors.orangeAccent,
+          ),
+          PowerstatsWidget(
+            status: 'Durabilidade',
+            valor: widget.hero.durability,
+            progressoCor: Colors.amberAccent,
           ),
         ],
       ),
