@@ -23,33 +23,31 @@ class _PowerstatsWidgetState extends State<PowerstatsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 5, 0, 0),
+            padding: EdgeInsets.symmetric(vertical: 5),
             child: Text(widget.status),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 5, 10, 10),
-            child: Row(
-              children: [
-                Expanded(
-                  child: LinearPercentIndicator(
-                    animation: true,
-                    lineHeight: 20.0,
-                    animationDuration: 1000,
-                    percent: (double.parse(widget.valor) / 100),
-                    center: Text(
-                      widget.valor,
-                      style: TextStyle(
-                          color: double.parse(widget.valor) >= 50
-                              ? Colors.black
-                              : Colors.white),
-                    ),
-                    linearStrokeCap: LinearStrokeCap.roundAll,
-                    progressColor: widget.progressoCor,
-                    backgroundColor: Colors.black87,
+          Row(
+            children: [
+              Expanded(
+                child: LinearPercentIndicator(
+                  leading: Text(''),
+                  animation: true,
+                  lineHeight: 18.0,
+                  animationDuration: 500,
+                  percent: (double.parse(widget.valor) / 100),
+                  center: Text(
+                    widget.valor,
+                    style: TextStyle(
+                        color: double.parse(widget.valor) >= 50
+                            ? Colors.black
+                            : Colors.white),
                   ),
+                  linearStrokeCap: LinearStrokeCap.roundAll,
+                  progressColor: widget.progressoCor,
+                  backgroundColor: Colors.black87,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
