@@ -1,6 +1,6 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:app_global_heroes/models/heroe_model.dart';
+import 'hero_details_widget.dart';
 
 class CardHeroes extends StatelessWidget {
   const CardHeroes({
@@ -10,6 +10,7 @@ class CardHeroes extends StatelessWidget {
     required this.name,
     required this.fullName,
     required this.id,
+    required this.hero,
   }) : super(key: key);
 
   final double screenHeight;
@@ -17,13 +18,22 @@ class CardHeroes extends StatelessWidget {
   final String name;
   final String fullName;
   final String id;
+  final Heroe hero;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return HeroDetailsWidget(hero: hero);
+            },
+          );
+        },
         child: Stack(
           alignment: Alignment.topRight,
           children: [

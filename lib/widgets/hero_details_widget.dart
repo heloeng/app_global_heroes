@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:app_global_heroes/models/heroe_model.dart';
 
 class HeroDetailsWidget extends StatefulWidget {
-  final HeroeModel hero;
+  final Heroe hero;
   HeroDetailsWidget({
     required this.hero,
   });
@@ -24,7 +24,7 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
             children: [
               Expanded(
                 child: Image.network(
-                  widget.hero.imagem,
+                  widget.hero.image.url,
                   fit: BoxFit.cover,
                   height: 280,
                 ),
@@ -33,32 +33,32 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
           ),
           PowerstatsWidget(
             status: 'Poder',
-            valor: widget.hero.power,
+            valor: widget.hero.powerstats.power,
             progressoCor: Colors.redAccent,
           ),
           PowerstatsWidget(
             status: 'Inteligência',
-            valor: widget.hero.intelligence,
+            valor: widget.hero.powerstats.intelligence,
             progressoCor: Colors.blueAccent,
           ),
           PowerstatsWidget(
             status: 'Velocidade',
-            valor: widget.hero.speed,
+            valor: widget.hero.powerstats.speed,
             progressoCor: Colors.greenAccent,
           ),
           PowerstatsWidget(
             status: 'Força',
-            valor: widget.hero.strength,
+            valor: widget.hero.powerstats.strength,
             progressoCor: Colors.purpleAccent,
           ),
           PowerstatsWidget(
             status: 'Combate',
-            valor: widget.hero.combat,
+            valor: widget.hero.powerstats.combat,
             progressoCor: Colors.orangeAccent,
           ),
           PowerstatsWidget(
             status: 'Durabilidade',
-            valor: widget.hero.durability,
+            valor: widget.hero.powerstats.durability,
             progressoCor: Colors.amberAccent,
           ),
         ],

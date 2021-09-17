@@ -1,5 +1,5 @@
 import 'home_page.dart';
-import '../widgets/splash_loading_page.dart';
+import '../widgets/splash_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'login_page.dart';
