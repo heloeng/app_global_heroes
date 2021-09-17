@@ -11,7 +11,7 @@ class SplashLoadingWidget extends StatelessWidget {
             child: Container(
               color: Color.fromRGBO(16, 16, 16, 1),
               child: Image.asset(
-                "assets/splash.gif",
+                "assets/logo.png",
                 fit: BoxFit.contain,
               ),
             ),

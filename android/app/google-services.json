@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "265044563582",
+    "project_id": "app-global-heroes",
+    "storage_bucket": "app-global-heroes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265044563582:android:f36a60d43bb293ae0aea2f",
+        "android_client_info": {
+          "package_name": "com.example.app_global_heroes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265044563582-uhqig6le5la3q0ka0ac465jqc7dou0sg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfbhzTE6yUbgpJ73Y6lZir6AbSuNV9uDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265044563582-uhqig6le5la3q0ka0ac465jqc7dou0sg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
