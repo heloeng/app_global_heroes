@@ -13,7 +13,7 @@ class _SplashWidgetState extends State<SplashWidget> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 5), () {
+    Timer(Duration(seconds: 3), () {
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -33,7 +33,7 @@ class _SplashWidgetState extends State<SplashWidget> {
               child: Container(
                 color: Color.fromRGBO(16, 16, 16, 1),
                 child: Image.asset(
-                  "assets/splash.gif",
+                  "assets/logo.png",
                   fit: BoxFit.contain,
                 ),
               ),
