@@ -3,6 +3,7 @@ import 'package:app_global_heroes/models/heroe_model.dart';
 import 'package:app_global_heroes/widgets/hero_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 class GetHeroesWidget extends StatefulWidget {
   @override
@@ -37,9 +38,16 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                 children: [
                   InkWell(
                     onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => HeroDetailsWidget(hero: heroe));
+                      showAnimatedDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) {
+                          return HeroDetailsWidget(hero: heroe);
+                        },
+                        animationType: DialogTransitionType.sizeFade,
+                        curve: Curves.fastOutSlowIn,
+                        duration: Duration(seconds: 1),
+                      );
                     },
                     child: ListTile(
                       title: Text(heroe.name),
