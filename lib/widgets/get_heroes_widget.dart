@@ -1,9 +1,11 @@
 import 'dart:convert';
-import 'package:app_global_heroes/models/heroe_model.dart';
-import 'package:app_global_heroes/widgets/hero_details_widget.dart';
+
+//import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:app_global_heroes/models/search_result_model.dart';
+import 'package:app_global_heroes/pages/home_page.dart';
+import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 class GetHeroesWidget extends StatefulWidget {
   @override
@@ -11,17 +13,18 @@ class GetHeroesWidget extends StatefulWidget {
 }
 
 class _GetHeroesWidgetState extends State<GetHeroesWidget> {
-  Future<List<dynamic>> fetch() async {
+  Future<SearchResult> fetch() async {
     var url = Uri.parse(
         'https://www.superheroapi.com/api.php/2341455595984511/search/batman');
-    var response = await http.get(url);
-    var json = jsonDecode(response.body);
-    return json['results'];
+    final response = await http.get(url);
+
+    SearchResult heroes = SearchResult.fromJson(jsonDecode(response.body));
+    return heroes;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
+    return FutureBuilder<SearchResult>(
       future: fetch(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
@@ -31,40 +34,29 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
         }
         if (snapshot.hasData) {
           return ListView.builder(
-            itemCount: snapshot.data!.length,
+            itemCount: snapshot.data!.results.length,
             itemBuilder: (context, index) {
-              var heroe = HeroeModel.fromMap(snapshot.data![index]);
-              return Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      showAnimatedDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (BuildContext context) {
-                          return HeroDetailsWidget(hero: heroe);
-                        },
-                        animationType: DialogTransitionType.sizeFade,
-                        curve: Curves.fastOutSlowIn,
-                        duration: Duration(seconds: 1),
-                      );
-                    },
-                    child: ListTile(
-                      title: Text(heroe.name),
-                      subtitle: Text(heroe.fullName),
-                      leading: CircleAvatar(
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(heroe.imagem),
-                      ),
-                    ),
-                  ),
-                ],
+              var heroe = snapshot.data!.results[index];
+              return CardHeroes(
+                screenHeight: MediaQuery.of(context).size.height,
+                fotoUrl: heroe.image.url,
+                id: heroe.id,
+                name: heroe.name,
+                fullName: heroe.biography.fullName,
               );
             },
           );
         }
-        return Center(
-          child: CircularProgressIndicator(),
+        //   return Center(
+        // child: CircularProgressIndicator(),
+
+        //   )
+
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => HomePage()));
+          },
         );
       },
     );
