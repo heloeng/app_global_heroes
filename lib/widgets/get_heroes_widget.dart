@@ -1,8 +1,9 @@
 import 'dart:convert';
-
 import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:app_global_heroes/widgets/hero_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 
 class GetHeroesWidget extends StatefulWidget {
   @override
@@ -32,26 +33,29 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
           return ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              var heroe = HeroeModel(
-                name: snapshot.data![index]['name'],
-                fullName: snapshot.data![index]['biography']['full-name'],
-                imagem: snapshot.data![index]['image']['url'],
-                intelligence: snapshot.data![index]['powerstats']
-                    ['intelligence'],
-                strength: snapshot.data![index]['powerstats']['strength'],
-                speed: snapshot.data![index]['powerstats']['speed'],
-                durability: snapshot.data![index]['powerstats']['durability'],
-                power: snapshot.data![index]['powerstats']['power'],
-                combat: snapshot.data![index]['powerstats']['combat'],
-              );
+              var heroe = HeroeModel.fromMap(snapshot.data![index]);
               return Column(
                 children: [
-                  ListTile(
-                    title: Text(heroe.name),
-                    subtitle: Text(heroe.fullName),
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(heroe.imagem),
+                  InkWell(
+                    onTap: () {
+                      showAnimatedDialog(
+                        context: context,
+                        barrierDismissible: true,
+                        builder: (BuildContext context) {
+                          return HeroDetailsWidget(hero: heroe);
+                        },
+                        animationType: DialogTransitionType.sizeFade,
+                        curve: Curves.fastOutSlowIn,
+                        duration: Duration(seconds: 1),
+                      );
+                    },
+                    child: ListTile(
+                      title: Text(heroe.name),
+                      subtitle: Text(heroe.fullName),
+                      leading: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(heroe.imagem),
+                      ),
                     ),
                   ),
                 ],

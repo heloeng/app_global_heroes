@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         padding: EdgeInsets.all(30),
         decoration: BoxDecoration(
-          color: Color.fromRGBO(15, 32, 38, 1),
+          color: Color.fromRGBO(16, 16, 16, 1),
         ),
         child: Form(
           child: Column(
