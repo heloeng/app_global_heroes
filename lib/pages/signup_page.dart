@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
+import 'login_page.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -78,7 +79,21 @@ class _SignupPageState extends State<SignupPage> {
                                   },
                                   child: Text("Criar conta"),
                                 ),
-                              )
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 15),
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => LoginPage(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text("Tenho Cadastro"),
+                                ),
+                              ),
                             ],
                           ),
                         ),
