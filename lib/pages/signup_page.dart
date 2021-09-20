@@ -66,13 +66,14 @@ class _SignupPageState extends State<SignupPage> {
                                 padding: EdgeInsets.all(20),
                                 child: ElevatedButton(
                                   onPressed: () async {
+                                    final List<String> favoritos = [];
                                     final user = UserModel(
-                                      nome: nome,
-                                      email: email,
-                                      nickName: nickName,
-                                    );
+                                        nome: nome,
+                                        email: email,
+                                        nickName: nickName,
+                                        favoritos: favoritos);
                                     await userController.signup(
-                                        email, senha, user);
+                                        email, senha, user, favoritos);
 
                                     Navigator.pop(context);
                                   },

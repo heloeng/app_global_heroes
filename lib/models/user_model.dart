@@ -3,20 +3,22 @@ class UserModel {
   final String email;
   final String nickName;
   final String? key;
+  final List<dynamic>? favoritos;
 
-  UserModel({
-    required this.nome,
-    required this.email,
-    required this.nickName,
-    this.key,
-  });
+  UserModel(
+      {required this.nome,
+      required this.email,
+      required this.nickName,
+      this.key,
+      this.favoritos});
 
-  static UserModel fromMap(Map<String, dynamic> map, [String? key]) {
+  static UserModel fromMap(Map<String, dynamic> map) {
     return UserModel(
-      key: key,
+      key: map['key'],
       nome: map['nome'],
       email: map['email'],
       nickName: map['nickName'],
+      favoritos: map['favoritos'],
     );
   }
 
@@ -26,6 +28,7 @@ class UserModel {
       'nome': nome,
       'nickName': nickName,
       'email': email,
+      'favoritos': favoritos,
     };
   }
 }

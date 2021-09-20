@@ -2,9 +2,7 @@ import 'dart:convert';
 
 //import 'package:app_global_heroes/models/heroe_model.dart';
 import 'package:app_global_heroes/models/search_result_model.dart';
-import 'package:app_global_heroes/pages/home_page.dart';
 import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
-import 'package:app_global_heroes/widgets/hero_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,7 +12,6 @@ class GetHeroesWidget extends StatefulWidget {
 }
 
 class _GetHeroesWidgetState extends State<GetHeroesWidget> {
- 
   //variável  "heroName "vai receber o nome digitado(wordToFilter)
   //para não inicializar a aplicativo com a lista vazia , foi acrescentado "Superman"
   //para inicializar a lista preenchida.
@@ -30,8 +27,6 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
     SearchResult heroes = SearchResult.fromJson(jsonDecode(response.body));
     return heroes;
   }
-
-
 
 //TextEditingController: criar o controller  para um campo de texto editável.
   //Sempre que o usuário modifica um campo de texto com um TextEditingController associado e o
@@ -67,8 +62,6 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                 //se não atribuir que a variavel "heroName" vai receber o valor digitado no  "wordToFilter"
                 //o campo de pesquisa seria sempre igual com o mesmo valor "stático"  atribuido na chamada da api.
                 heroName = wordToFilter;
-
-                print('mostrar texto: $wordToFilter');
 
                 // "fetch()" retorna algo futuramente : "Future<SearchResult>"
                 //depois que tiver o retorno... então faça alguma coisa
