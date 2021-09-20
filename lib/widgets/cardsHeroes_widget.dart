@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:app_global_heroes/controllers/user_controller.dart';
 import 'package:app_global_heroes/models/user_model.dart';
 import 'package:app_global_heroes/widgets/favorito_widget.dart';
@@ -38,7 +39,14 @@ class CardHeroes extends StatelessWidget {
             context: context,
             barrierDismissible: true,
             builder: (BuildContext context) {
-              return HeroDetailsWidget(hero: hero);
+              return AnimatedCard(
+                direction:
+                    AnimatedCardDirection.right, //Initial animation direction
+                initDelay:
+                    Duration(milliseconds: 100), //Delay to initial animation
+                duration: Duration(milliseconds: 1000),
+                child: HeroDetailsWidget(hero: hero),
+              );
             },
           );
         },
