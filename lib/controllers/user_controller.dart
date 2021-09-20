@@ -35,7 +35,10 @@ class UserController extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    await _auth.signOut();
+    await _auth.signOut(
+
+
+    );
   }
 
   Future<void> signup(

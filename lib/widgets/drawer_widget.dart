@@ -25,7 +25,39 @@ class DrawerWidget extends StatelessWidget {
             title: Text('Sign Out'),
             leading: FaIcon(FontAwesomeIcons.signOutAlt),
             onTap: () async {
-              await userController.logout();
+              // await userController.logout();
+
+showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Logout'),
+          content: Text('Deseja sair da conta?'),
+          actions: <Widget>[
+           
+            ElevatedButton(
+              child: Text('Sim'),
+              onPressed: () async {
+                
+               await userController.logout();
+              },
+            ),
+
+             ElevatedButton(
+              // color: Colors.blueAccent,
+              // child: Text('Não', style: TextStyle(color: Colors.white),),
+               child: Text('Não'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }
+    );
+
+
+
             },
           ),
         ],
