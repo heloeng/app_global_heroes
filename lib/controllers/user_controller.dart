@@ -35,13 +35,17 @@ class UserController extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    await _auth.signOut();
+    await _auth.signOut(
+
+
+    );
   }
 
   Future<void> signup(
     String email,
     String senha,
     UserModel payload,
+    List<String> favoritos,
   ) async {
     final credentials = await _auth.createUserWithEmailAndPassword(
       email: email,
@@ -50,6 +54,7 @@ class UserController extends ChangeNotifier {
     final uid = credentials.user?.uid;
     final data = payload.toMap();
     data['key'] = uid;
+    data['favoritos'] = favoritos;
 
     final doc = _db.collection('usuarios').doc(uid);
     await doc.set(data);

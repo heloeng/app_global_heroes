@@ -1,5 +1,10 @@
+import 'package:app_global_heroes/controllers/user_controller.dart';
+import 'package:app_global_heroes/models/user_model.dart';
+import 'package:app_global_heroes/widgets/favorito_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:provider/provider.dart';
 import 'hero_details_widget.dart';
 
 class CardHeroes extends StatelessWidget {
@@ -22,6 +27,9 @@ class CardHeroes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late final userController =
+        Provider.of<UserController>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -115,15 +123,45 @@ class CardHeroes extends StatelessWidget {
                                 color: Color(0xffd17842),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Icon(
-                                  Icons.arrow_forward_ios,
-                                  size: 20,
-                                  color: Colors.white,
+                              // child: FavoritoWiget(hero: hero),
+                              child: InkWell(
+                                //Esse onTap realiza a requisição ao Firebase dos dados do usuário logado, adiciona à lista de favoritos
+                                //o ID do herói e atualiza a lista de favoritos no banco de dados
+                                onTap: () async {
+                                  final usuario = await FirebaseFirestore
+                                      .instance
+                                      .collection('usuarios')
+                                      .doc(userController.user!.uid)
+                                      .get();
+
+                                  final data = usuario.data();
+
+                                  final atualUsuario = UserModel.fromMap(data!);
+                                  if (!atualUsuario.favoritos!
+                                      .contains(hero.id)) {
+                                    atualUsuario.favoritos!.add(hero.id);
+                                  } else {
+                                    atualUsuario.favoritos!.remove(hero.id);
+                                  }
+
+                                  final novoUsuario = UserModel(
+                                    nome: userController.model.nome,
+                                    email: userController.model.email,
+                                    nickName: userController.model.nickName,
+                                    key: userController.user!.uid,
+                                    favoritos: atualUsuario.favoritos,
+                                  ).toMap();
+
+                                  FirebaseFirestore.instance
+                                      .collection('usuarios')
+                                      .doc(userController.user!.uid)
+                                      .update(novoUsuario);
+                                },
+                                child: FavoritoWidget(
+                                  hero: hero,
                                 ),
                               ),
-                            )
+                            ),
                           ],
                         )
                       ],
