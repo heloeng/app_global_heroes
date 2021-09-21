@@ -60,7 +60,7 @@ class CardHeroes extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xff171b22),
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
@@ -78,7 +78,7 @@ class CardHeroes extends StatelessWidget {
                           fit: BoxFit.cover,
                           image: NetworkImage(fotoUrl),
                         ),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
