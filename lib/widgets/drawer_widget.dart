@@ -40,6 +40,7 @@ showDialog(
               onPressed: () async {
                 
                await userController.logout();
+               Navigator.of(context).pop();
               },
             ),
 
