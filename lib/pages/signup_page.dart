@@ -24,87 +24,83 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Criar conta"),
-        ),
         body: Column(
-          children: [
-            Expanded(
-              child: Container(
-                color: Color.fromRGBO(16, 16, 16, 1),
-                padding: EdgeInsets.all(30),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Form(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              TextFormField(
-                                decoration: InputDecoration(labelText: 'Nome'),
-                                onChanged: (texto) => nome = texto,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: 'Email'),
-                                onChanged: (texto) => email = texto,
-                              ),
-                              TextFormField(
-                                decoration:
-                                    InputDecoration(labelText: 'Nickname'),
-                                onChanged: (texto) => nickName = texto,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(labelText: 'Senha'),
-                                onChanged: (texto) => senha = texto,
-                              ),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    labelText: 'Confirmar Senha'),
-                                onChanged: (texto) => confirmarSenha = texto,
-                              ),
-                              Container(
-                                padding: EdgeInsets.all(20),
-                                child: ElevatedButton(
-                                  onPressed: () async {
-                                    final List<String> favoritos = [];
-                                    final user = UserModel(
-                                        nome: nome,
-                                        email: email,
-                                        nickName: nickName,
-                                        favoritos: favoritos);
-                                    await userController.signup(
-                                        email, senha, user, favoritos);
-
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text("Criar conta"),
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 15),
-                                child: OutlinedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => LoginPage(),
-                                      ),
-                                    );
-                                  },
-                                  child: Text("Tenho Cadastro"),
-                                ),
-                              ),
-                            ],
+      children: [
+        Expanded(
+          child: Container(
+            color: Color.fromRGBO(16, 16, 16, 1),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Form(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'Nome'),
+                            onChanged: (texto) => nome = texto,
                           ),
-                        ),
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'Email'),
+                            onChanged: (texto) => email = texto,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'Nickname'),
+                            onChanged: (texto) => nickName = texto,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(labelText: 'Senha'),
+                            onChanged: (texto) => senha = texto,
+                          ),
+                          TextFormField(
+                            decoration:
+                                InputDecoration(labelText: 'Confirmar Senha'),
+                            onChanged: (texto) => confirmarSenha = texto,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(top: 20),
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                final List<String> favoritos = [];
+                                final user = UserModel(
+                                    nome: nome,
+                                    email: email,
+                                    nickName: nickName,
+                                    favoritos: favoritos);
+                                await userController.signup(
+                                    email, senha, user, favoritos);
+
+                                Navigator.pop(context);
+                              },
+                              child: Text("Criar conta"),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: OutlinedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => LoginPage(),
+                                  ),
+                                );
+                              },
+                              child: Text("Tenho Cadastro"),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            )
-          ],
-        ));
+            ),
+          ),
+        )
+      ],
+    ));
   }
 }
