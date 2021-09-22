@@ -23,10 +23,23 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
           Row(
             children: [
               Expanded(
-                child: Image.network(
+                child:
+                    // Image.network(
+                    //   widget.hero.image.url,
+                    //   fit: BoxFit.cover,
+                    //   height: 280,
+                    // ),
+                    Image.network(
                   widget.hero.image.url,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                   height: 280,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return Image.asset(
+                      'assets/no-image-available.jpg',
+                      height: 280,
+                    );
+                  },
                 ),
               ),
             ],
