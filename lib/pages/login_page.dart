@@ -43,11 +43,18 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Email'),
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.mail_outline,
+                                ),
+                                labelText: 'Email'),
                             onChanged: (texto) => email = texto,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Senha'),
+                            decoration: InputDecoration(
+                                prefixIcon:
+                                    Icon(Icons.enhanced_encryption_outlined),
+                                labelText: 'Senha'),
                             obscureText: true,
                             onChanged: (texto) => senha = texto,
                           ),
@@ -64,6 +71,14 @@ class _LoginPageState extends State<LoginPage> {
                                     msg = "A senha está incorreta";
                                   } else if (e.code == "invalid-email") {
                                     msg = "Email inválido";
+                                  } else if (e.code == "user-not-found") {
+                                    msg = "Usuário não cadastrado";
+                                  } else if (e.code == "too-many-requests") {
+                                    msg = "Tente novamente mais tarde";
+                                  } else if (e.code ==
+                                      "operation-not-allowed") {
+                                    msg =
+                                        "Login com Email e senha não está habilitado.";
                                   } else {
                                     msg = "Ocorreu um erro";
                                   }

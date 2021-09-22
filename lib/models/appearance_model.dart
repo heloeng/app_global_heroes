@@ -15,12 +15,16 @@ class Appearance {
       required this.hairColor});
 
   Appearance.fromJson(Map<String, dynamic> json) {
-    gender = json['gender'];
-    race = json['race'];
-    height = json['height'].cast<String>();
-    weight = json['weight'].cast<String>();
-    eyeColor = json['eye-color'];
-    hairColor = json['hair-color'];
+    gender = json['gender'] == 'null' ? 'Undefined' : json['gender'];
+    race = json['race'] == 'null' ? 'Undefined' : json['race'];
+    height = json['height'].cast<String>() == 'null'
+        ? 'Undefined'
+        : json['height'].cast<String>();
+    weight = json['weight'].cast<String>() == 'null'
+        ? 'Undefined'
+        : json['weight'].cast<String>();
+    eyeColor = json['eye-color'] == 'null' ? 'Undefined' : json['eye-color'];
+    hairColor = json['hair-color'] == 'null' ? 'Undefined' : json['hair-color'];
   }
 
   Map<String, dynamic> toJson() {

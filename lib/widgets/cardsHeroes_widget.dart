@@ -1,3 +1,4 @@
+import 'package:animated_card/animated_card.dart';
 import 'package:app_global_heroes/controllers/user_controller.dart';
 import 'package:app_global_heroes/models/user_model.dart';
 import 'package:app_global_heroes/widgets/favorito_widget.dart';
@@ -38,7 +39,14 @@ class CardHeroes extends StatelessWidget {
             context: context,
             barrierDismissible: true,
             builder: (BuildContext context) {
-              return HeroDetailsWidget(hero: hero);
+              return AnimatedCard(
+                direction:
+                    AnimatedCardDirection.right, //Initial animation direction
+                initDelay:
+                    Duration(milliseconds: 100), //Delay to initial animation
+                duration: Duration(milliseconds: 1000),
+                child: HeroDetailsWidget(hero: hero),
+              );
             },
           );
         },
@@ -52,7 +60,7 @@ class CardHeroes extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Color(0xff171b22),
-                borderRadius: BorderRadius.circular(25),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 children: [
@@ -66,11 +74,18 @@ class CardHeroes extends StatelessWidget {
                             color: Color(0xff30221f),
                           ),
                         ],
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(fotoUrl),
-                        ),
-                        borderRadius: BorderRadius.circular(20.0),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Image.network(
+                        hero.image.url,
+                        fit: BoxFit.cover,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Image.asset(
+                            'assets/no-image.jpeg',
+                            fit: BoxFit.fill,
+                          );
+                        },
                       ),
                     ),
                   ),
