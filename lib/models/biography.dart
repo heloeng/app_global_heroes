@@ -17,13 +17,18 @@ class Biography {
       required this.alignment});
 
   Biography.fromJson(Map<String, dynamic> json) {
-    fullName = json['full-name'];
-    alterEgos = json['alter-egos'];
-    aliases = json['aliases'].cast<String>();
-    placeOfBirth = json['place-of-birth'];
-    firstAppearance = json['first-appearance'];
-    publisher = json['publisher'];
-    alignment = json['alignment'];
+    fullName = json['full-name'] == 'null' ? 'Undefined' : json['full-name'];
+    alterEgos = json['alter-egos'] == 'null' ? 'Undefined' : json['alter-egos'];
+    aliases = json['aliases'].cast<String>() == 'null'
+        ? 'Undefined'
+        : json['aliases'].cast<String>();
+    placeOfBirth =
+        json['place-of-birth'] == 'null' ? 'Undefined' : json['place-of-birth'];
+    firstAppearance = json['first-appearance'] == 'null'
+        ? 'Undefined'
+        : json['first-appearance'];
+    publisher = json['publisher'] == 'null' ? 'Undefined' : json['publisher'];
+    alignment = json['alignment'] == 'null' ? 'Undefined' : json['alignment'];
   }
 
   Map<String, dynamic> toJson() {
