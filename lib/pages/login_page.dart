@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 import 'signup_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -20,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
     context,
     listen: false,
   );
-  
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +43,18 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: [
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Email'),
+                            decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.mail_outline,
+                                ),
+                                labelText: 'Email'),
                             onChanged: (texto) => email = texto,
                           ),
                           TextFormField(
-                            decoration: InputDecoration(labelText: 'Senha'),
+                            decoration: InputDecoration(
+                                prefixIcon:
+                                    Icon(Icons.enhanced_encryption_outlined),
+                                labelText: 'Senha'),
                             obscureText: true,
                             onChanged: (texto) => senha = texto,
                           ),
@@ -62,19 +67,19 @@ class _LoginPageState extends State<LoginPage> {
                                 } on FirebaseAuthException catch (e) {
                                   var msg = "";
 
-                                if (e.code == "wrong-password") {
+                                  if (e.code == "wrong-password") {
                                     msg = "A senha está incorreta";
                                   } else if (e.code == "invalid-email") {
                                     msg = "Email inválido";
-                                  } else if (e.code == "user-not-found"){
+                                  } else if (e.code == "user-not-found") {
                                     msg = "Usuário não cadastrado";
-
-                                  }else if (e.code == "too-many-requests"){
-                                    msg ="Tente novamente mais tarde";
-                                  }else if (e.code == "operation-not-allowed"){
-                                    msg ="Login com Email e senha não está habilitado.";
-                                  }
-                                  else {
+                                  } else if (e.code == "too-many-requests") {
+                                    msg = "Tente novamente mais tarde";
+                                  } else if (e.code ==
+                                      "operation-not-allowed") {
+                                    msg =
+                                        "Login com Email e senha não está habilitado.";
+                                  } else {
                                     msg = "Ocorreu um erro";
                                   }
 
