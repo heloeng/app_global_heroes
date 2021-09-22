@@ -1,4 +1,5 @@
 // ignore: unused_import
+import 'package:app_global_heroes/pages/edit_user_page.dart';
 import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controllers/user_controller.dart';
@@ -8,7 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
+
 class DrawerWidget extends StatelessWidget {
+   List<UserModel> user=[];
+
   @override
   Widget build(BuildContext context) {
     late final userController =
@@ -18,13 +22,38 @@ class DrawerWidget extends StatelessWidget {
       elevation: 30,
       child: ListView(
         children: [
-          UserAccountsDrawerHeader(
-            accountName: Text(userController.model.nome),
-            accountEmail: Text(userController.user!.email!),
-          ),
+          StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: FirebaseFirestore.instance
+            .collection('usuarios')
+            .where('key', isEqualTo: userController.user!.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+           user = snapshot.data!.docs.map((map) {
+            final data = map.data();
+            return UserModel.fromMap(data);
+          }).toList();
+
+          print("user ${user[0].nome}");
+              return 
+                UserAccountsDrawerHeader(
+                  accountName: Text(user[0].nome),
+                  accountEmail: Text(user[0].email),
+                );
+        
+        }
+      ),
+
           ListTile(
             title: Text("Favoritos"),
             onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>FavoritosPage()));}
+          ),
+          ListTile(
+            title: Text("Editar Usuário"),
+            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUser(edituser: user[0],)));}
           ),
           ListTile(
             title: Text('Sign Out'),
