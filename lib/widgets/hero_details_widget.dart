@@ -36,7 +36,7 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
                     return Image.asset(
-                      'assets/no-image-available.jpg',
+                      'assets/no-image.jpeg',
                       height: 280,
                     );
                   },

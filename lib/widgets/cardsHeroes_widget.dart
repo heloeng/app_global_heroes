@@ -82,7 +82,7 @@ class CardHeroes extends StatelessWidget {
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
                           return Image.asset(
-                            'assets/no-image-available.jpg',
+                            'assets/no-image.jpeg',
                             fit: BoxFit.fill,
                           );
                         },
