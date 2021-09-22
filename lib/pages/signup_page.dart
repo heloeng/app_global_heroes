@@ -1,9 +1,15 @@
+
+import 'dart:typed_data';
+
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
+import 'package:file_picker/file_picker.dart';
+
 
 // Define  um widget Form customizado
 class SignupPage extends StatefulWidget {
@@ -19,6 +25,7 @@ class _SignupPageState extends State<SignupPage> {
   String nickName = '';
   String senha = '';
   String confirmarSenha = '';
+  Uint8List? file;
 
   late final userController = Provider.of<UserController>(
     context,
@@ -134,6 +141,24 @@ class _SignupPageState extends State<SignupPage> {
                             }
                           },
                         ),
+                        // Container(
+                        //   padding: EdgeInsets.all(20),
+                        //   child: ElevatedButton(
+                        //     onPressed:() async {
+                        //       final result = 
+                        //         await FilePicker.platform.pickFiles(type:FileType.image);
+
+                        //     if (result != null) {
+                        //       setState((){
+                        //         final bytes = result.files.first.bytes;
+                        //         file = bytes;
+                        //       });
+                        //     }
+                        //     },
+                        //     style: ElevatedButton.styleFrom(primary: Color(0XDD8e4fab)),
+                        //     child: Text("Add Imagem"),
+                        //   ),
+                        // ),
                         Container(
                           padding: EdgeInsets.all(20),
                           child: ElevatedButton(

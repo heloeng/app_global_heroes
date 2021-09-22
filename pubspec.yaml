@@ -45,6 +45,7 @@ dev_dependencies:
     sdk: flutter
   font_awesome_flutter: ^9.1.0
   email_validator: ^2.0.1
+  file_picker: ^4.0.0
 
 
 # For information on the generic Dart part of this file, see the
