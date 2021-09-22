@@ -28,10 +28,8 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     // Cria o widget Form usando  _formKey
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Criar conta"),
-        ),
         body: Column(
+
           children: [
             Expanded(
               child: Container(
@@ -175,15 +173,18 @@ class _SignupPageState extends State<SignupPage> {
                                 ),
                               ),
                             ],
+
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            )
-          ],
-        ));
+            ),
+          ),
+        )
+      ],
+    ));
   }
 }

@@ -72,6 +72,16 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                     itemCount: snapshot.data!.results.length,
                     itemBuilder: (context, index) {
                       var heroe = snapshot.data!.results[index];
+                      // return CardHeroes(
+                      //   screenHeight: MediaQuery.of(context).size.height,
+                      //   fotoUrl: heroe.image.url,
+                      //   id: heroe.id,
+                      //   name: heroe.name,
+                      //   fullName: heroe.biography.fullName,
+                      //   hero: heroe,
+                      // );
+
+
                       return AnimatedCard(
                         direction: AnimatedCardDirection
                             .right, //Initial animation direction

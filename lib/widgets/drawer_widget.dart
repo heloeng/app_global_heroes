@@ -27,37 +27,31 @@ class DrawerWidget extends StatelessWidget {
             onTap: () async {
               // await userController.logout();
 
-showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Logout'),
-          content: Text('Deseja sair da conta?'),
-          actions: <Widget>[
-           
-            ElevatedButton(
-              child: Text('Sim'),
-              onPressed: () async {
-                
-               await userController.logout();
-              },
-            ),
-
-             ElevatedButton(
-              // color: Colors.blueAccent,
-              // child: Text('Não', style: TextStyle(color: Colors.white),),
-               child: Text('Não'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      }
-    );
-
-
-
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Sign Out'),
+                      content: Text('Deseja sair da conta?'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: Text('Sim'),
+                          onPressed: () async {
+                            await userController.logout();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        ElevatedButton(
+                          // color: Colors.blueAccent,
+                          // child: Text('Não', style: TextStyle(color: Colors.white),),
+                          child: Text('Não'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  });
             },
           ),
         ],
