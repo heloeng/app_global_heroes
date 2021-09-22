@@ -1,4 +1,5 @@
 // ignore: unused_import
+import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../controllers/user_controller.dart';
 // ignore: unused_import
@@ -20,6 +21,10 @@ class DrawerWidget extends StatelessWidget {
           UserAccountsDrawerHeader(
             accountName: Text(userController.model.nome),
             accountEmail: Text(userController.user!.email!),
+          ),
+          ListTile(
+            title: Text("Favoritos"),
+            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>FavoritosPage()));}
           ),
           ListTile(
             title: Text('Sign Out'),
