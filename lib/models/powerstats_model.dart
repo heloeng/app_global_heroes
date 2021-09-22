@@ -15,12 +15,12 @@ class Powerstats {
       required this.combat});
 
   Powerstats.fromJson(Map<String, dynamic> json) {
-    intelligence = json['intelligence'];
-    strength = json['strength'];
-    speed = json['speed'];
-    durability = json['durability'];
-    power = json['power'];
-    combat = json['combat'];
+    intelligence = json['intelligence'] == 'null' ? '0' : json['intelligence'];
+    strength = json['strength'] == 'null' ? '0' : json['strength'];
+    speed = json['speed'] == 'null' ? '0' : json['speed'];
+    durability = json['durability'] == 'null' ? '0' : json['durability'];
+    power = json['power'] == 'null' ? '0' : json['power'];
+    combat = json['combat'] == 'null' ? '0' : json['combat'];
   }
 
   Map<String, dynamic> toJson() {

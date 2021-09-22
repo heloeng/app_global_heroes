@@ -5,8 +5,9 @@ class Work {
   Work({required this.occupation, required this.base});
 
   Work.fromJson(Map<String, dynamic> json) {
-    occupation = json['occupation'];
-    base = json['base'];
+    occupation =
+        json['occupation'] == 'null' ? 'Undefined' : json['occupation'];
+    base = json['base'] == 'null' ? 'Undefined' : json['base'];
   }
 
   Map<String, dynamic> toJson() {

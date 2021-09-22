@@ -1,4 +1,7 @@
+
 import 'dart:typed_data';
+
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -48,14 +51,15 @@ class _SignupPageState extends State<SignupPage> {
                       children: [
                         TextFormField(
                           // O validador recebe o texto digitado
-                          decoration: InputDecoration(labelText: 'Nome'),
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person_add_alt),
+                              labelText: 'Nome'),
                           onChanged: (texto) => nome = texto,
                           validator: (String? texto) {
                             //string null label testar se
                             //se o texto é diferente de nulo e não está vazio
                             if (texto != null && texto.isNotEmpty) {
-                              print(texto.length);
-                              if (texto.length < 3) {
+                                if (texto.length < 3) {
                                 return "Digite um Nome válido.";
                               }
                             } else {
@@ -76,7 +80,6 @@ class _SignupPageState extends State<SignupPage> {
                           onChanged: (texto) => email = texto,
                           style: TextStyle(color: Colors.white),
                           keyboardType: TextInputType.emailAddress,
-                          autofocus: true,
                           decoration: InputDecoration(
                             prefixIcon: Icon(
                               Icons.mail_outline,
@@ -86,14 +89,15 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                         TextFormField(
-                          decoration: InputDecoration(labelText: 'Nickname'),
+                          decoration: InputDecoration(
+                              prefixIcon: Icon(Icons.person_add_alt),
+                              labelText: 'Nickname'),
                           onChanged: (texto) => nickName = texto,
                           validator: (String? texto) {
                             //string null label testar se
                             //se o texto é diferente de nulo e não está vazio
                             if (texto != null && texto.isNotEmpty) {
-                              print(texto.length);
-                              if (texto.length < 1) {
+                                if (texto.length < 1) {
                                 return "Digite um Nickname válido.";
                               }
                             } else {
@@ -104,16 +108,16 @@ class _SignupPageState extends State<SignupPage> {
                         TextFormField(
                           onChanged: (texto) => senha = texto,
                           obscureText: true,
-                          autofocus: true,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.vpn_key_sharp),
+                            prefixIcon:
+                                Icon(Icons.enhanced_encryption_outlined),
                             labelText: 'Senha',
                             //border:OutlineInputBorder(),
                           ),
                           validator: (String? texto) {
                             if (texto != null && texto.isNotEmpty) {
-                              if (texto.length < 8) {
-                                return "Digite uma senha com 8 caracteres ou mais";
+                              if (texto.length < 6) {
+                                return "Digite uma senha com 6 caracteres ou mais";
                               }
                             } else {
                               return "Campo obrigatório";
@@ -122,15 +126,15 @@ class _SignupPageState extends State<SignupPage> {
                         ),
                         TextFormField(
                           decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.vpn_key_sharp),
+                              prefixIcon:
+                                  Icon(Icons.enhanced_encryption_outlined),
                               labelText: 'Confirmar Senha'),
                           onChanged: (texto) => confirmarSenha = texto,
                           obscureText: true,
-                          autofocus: true,
                           validator: (String? texto) {
                             if (texto != null && texto.isNotEmpty) {
-                              if (texto.length < 8) {
-                                return "Digite uma senha com 8 caracteres ou mais";
+                              if (texto.length < 6) {
+                                return "Digite uma senha com 6 caracteres ou mais";
                               }
                             } else {
                               return "Campo obrigatório";
@@ -165,12 +169,26 @@ class _SignupPageState extends State<SignupPage> {
                                     nome: nome,
                                     email: email,
                                     nickName: nickName,
-                                    favoritos: favoritos,
-                                    );
-                                await userController.signup(
-                                    email, senha, user, favoritos);
-
-                                Navigator.pop(context);
+                                    favoritos: favoritos);
+                                try {
+                                  await userController.signup(
+                                      email, senha, user, favoritos);
+                                  Navigator.pop(context);
+                                } on FirebaseAuthException catch (e) {
+                                  var msg = "";
+                                 
+                                  if (e.code == "email-already-in-use") {
+                                    msg =
+                                        "O e-mail fornecido já está em uso por outro usuário";
+                                  } else {
+                                    msg = "Ocorreu um erro";
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(msg),
+                                    ),
+                                  );
+                                }
                               }
                             },
                             child: Text("Criar conta"),
