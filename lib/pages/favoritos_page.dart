@@ -74,32 +74,27 @@ late final userController = Provider.of<UserController>(
                   );
                 }
                 if (snapshot.hasData) {
-                  return ListView.builder(
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return Center(
-                        child:
-                        Text('$favorito'));
-                      // return AnimatedCard(
-                      //   direction: AnimatedCardDirection
-                      //       .right, //Initial animation direction
-                      //   initDelay: Duration(
-                      //       milliseconds: 500), //Delay to initial animation
-                      //   duration: Duration(milliseconds: 1000),
-                      //   child: CardHeroes(
-                      //     screenHeight: MediaQuery.of(context).size.height,
-                      //     fotoUrl: heroe.image.url,
-                      //     id: heroe.id,
-                      //     name: heroe.name,
-                      //     fullName: heroe.biography.fullName,
-                      //     hero: heroe,
-                      //   ),
-                      // );
-                    },
+                  final Heroe hero = snapshot.data! ;
+                   return AnimatedCard(
+                    direction: AnimatedCardDirection
+                        .right, //Initial animation direction
+                    initDelay: Duration(
+                        milliseconds: 500), //Delay to initial animation
+                    duration: Duration(milliseconds: 1000),
+                    child: CardHeroes(
+                      screenHeight: MediaQuery.of(context).size.height,
+                      fotoUrl: hero.image.url,
+                      id: hero.id,
+                      name: hero.name,
+                      fullName: hero.biography.fullName,
+                      hero: hero,
+                    ),
                   );
-                }
+                };
+                
+              
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Text(""),
                 );
               },
             );
