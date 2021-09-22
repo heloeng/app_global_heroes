@@ -74,11 +74,18 @@ class CardHeroes extends StatelessWidget {
                             color: Color(0xff30221f),
                           ),
                         ],
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage(fotoUrl),
-                        ),
                         borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Image.network(
+                        hero.image.url,
+                        fit: BoxFit.cover,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Image.asset(
+                            'assets/no-image-available.jpg',
+                            fit: BoxFit.fill,
+                          );
+                        },
                       ),
                     ),
                   ),
