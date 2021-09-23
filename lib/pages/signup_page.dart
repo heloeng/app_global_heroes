@@ -1,4 +1,3 @@
-
 import 'dart:typed_data';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +8,6 @@ import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
 import 'package:file_picker/file_picker.dart';
-
 
 // Define  um widget Form customizado
 class SignupPage extends StatefulWidget {
@@ -39,7 +37,7 @@ class _SignupPageState extends State<SignupPage> {
       body: Column(children: [
         Expanded(
           child: Container(
-            color: Color.fromRGBO(16, 16, 16, 1),
+            color: Colors.black87,
             padding: EdgeInsets.all(30),
             child: SingleChildScrollView(
               child: Column(children: [
@@ -59,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
                             //string null label testar se
                             //se o texto é diferente de nulo e não está vazio
                             if (texto != null && texto.isNotEmpty) {
-                                if (texto.length < 3) {
+                              if (texto.length < 3) {
                                 return "Digite um Nome válido.";
                               }
                             } else {
@@ -97,7 +95,7 @@ class _SignupPageState extends State<SignupPage> {
                             //string null label testar se
                             //se o texto é diferente de nulo e não está vazio
                             if (texto != null && texto.isNotEmpty) {
-                                if (texto.length < 1) {
+                              if (texto.length < 1) {
                                 return "Digite um Nickname válido.";
                               }
                             } else {
@@ -145,7 +143,7 @@ class _SignupPageState extends State<SignupPage> {
                         //   padding: EdgeInsets.all(20),
                         //   child: ElevatedButton(
                         //     onPressed:() async {
-                        //       final result = 
+                        //       final result =
                         //         await FilePicker.platform.pickFiles(type:FileType.image);
 
                         //     if (result != null) {
@@ -176,7 +174,7 @@ class _SignupPageState extends State<SignupPage> {
                                   Navigator.pop(context);
                                 } on FirebaseAuthException catch (e) {
                                   var msg = "";
-                                 
+
                                   if (e.code == "email-already-in-use") {
                                     msg =
                                         "O e-mail fornecido já está em uso por outro usuário";
