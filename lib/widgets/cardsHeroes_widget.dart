@@ -32,7 +32,7 @@ class CardHeroes extends StatelessWidget {
         Provider.of<UserController>(context, listen: false);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: GestureDetector(
         onTap: () {
           showDialog<void>(

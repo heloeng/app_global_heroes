@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:app_global_heroes/controllers/user_controller.dart';
 import 'package:app_global_heroes/models/heroe_model.dart';
 import 'package:app_global_heroes/models/user_model.dart';
@@ -41,13 +41,12 @@ class _FavoritoWidgetState extends State<FavoritoWidget> {
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.favorite,
+            child: FaIcon(
+              usuarios[0].favoritos!.contains(widget.hero.id)
+                  ? FontAwesomeIcons.solidStar
+                  : FontAwesomeIcons.star,
               size: 20,
-              color: usuarios[0].favoritos!.contains(widget.hero.id)
-                  ? Colors.redAccent
-                  : Colors.white,
-              // color: Colors.white,
+              color: Color(0xff171b22),
             ),
           );
         });
