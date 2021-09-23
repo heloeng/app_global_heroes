@@ -35,6 +35,7 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     // Cria o widget Form usando  _formKey
     return Scaffold(
+      appBar:AppBar (),
       body: Column(children: [
         Expanded(
           child: Container(
@@ -106,6 +107,24 @@ class _EditUserState extends State<EditUser> {
                         Container(
                           padding: EdgeInsets.all(20),
                           child: ElevatedButton(
+                            onPressed:() async {
+                              final result = 
+                                await FilePicker.platform.pickFiles(type:FileType.image);
+
+                            if (result != null) {
+                              setState((){
+                                final bytes = result.files.first.bytes;
+                                file = bytes;
+                              });
+                            }
+                            },
+                            style: ElevatedButton.styleFrom(primary: Color(0XDD8e4fab)),
+                            child: Text("Add Imagem"),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.all(20),
+                          child: ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState?.validate() ?? false) {
                                 final List<String> favoritos = [];
@@ -114,7 +133,9 @@ class _EditUserState extends State<EditUser> {
                                     nome: nomeCont.text,
                                     email: userController.model.email,
                                     nickName: nickNameCont.text,
-                                    favoritos: favoritos).toMap();
+                                    favoritos: favoritos,
+                                    image:file
+                                    ).toMap();
                                 await FirebaseFirestore.instance
                                     .collection('usuarios')
                                     .doc(userController.user!.uid)
