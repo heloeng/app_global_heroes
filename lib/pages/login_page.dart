@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           Expanded(
             child: Container(
-              color: Color.fromRGBO(16, 16, 16, 1),
+              color: Colors.black87,
               padding: EdgeInsets.all(30),
               child: SingleChildScrollView(
                 child: Column(

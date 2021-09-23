@@ -31,7 +31,7 @@ class _SplashWidgetState extends State<SplashWidget> {
           children: [
             Expanded(
               child: Container(
-                color: Color.fromRGBO(16, 16, 16, 1),
+                color: Colors.black87,
                 child: Image.asset(
                   "assets/logo.png",
                   fit: BoxFit.contain,

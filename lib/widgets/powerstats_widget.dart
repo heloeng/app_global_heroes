@@ -34,7 +34,7 @@ class _PowerstatsWidgetState extends State<PowerstatsWidget> {
                   leading: Text(''),
                   animation: true,
                   lineHeight: 18.0,
-                  animationDuration: 500,
+                  animationDuration: 2000,
                   percent: (double.parse(widget.valor) / 100),
                   center: Text(
                     widget.valor,
