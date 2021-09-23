@@ -9,9 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-
 class DrawerWidget extends StatelessWidget {
-   List<UserModel> user=[];
+  List<UserModel> user = [];
 
   @override
   Widget build(BuildContext context) {
@@ -23,38 +22,42 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         children: [
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('usuarios')
-            .where('key', isEqualTo: userController.user!.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
+              stream: FirebaseFirestore.instance
+                  .collection('usuarios')
+                  .where('key', isEqualTo: userController.user!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
 
-           user = snapshot.data!.docs.map((map) {
-            final data = map.data();
-            return UserModel.fromMap(data);
-          }).toList();
+                user = snapshot.data!.docs.map((map) {
+                  final data = map.data();
+                  return UserModel.fromMap(data);
+                }).toList();
 
-          print("user ${user[0].nome}");
-              return 
-                UserAccountsDrawerHeader(
+                print("user ${user[0].nome}");
+                return UserAccountsDrawerHeader(
                   accountName: Text(user[0].nome),
                   accountEmail: Text(user[0].email),
                 );
-        
-        }
-      ),
-
+              }),
           ListTile(
-            title: Text("Favoritos"),
-            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>FavoritosPage()));}
-          ),
+              title: Text("Favoritos"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FavoritosPage()));
+              }),
           ListTile(
-            title: Text("Editar Usuário"),
-            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUser(edituser: user[0],)));}
-          ),
+              title: Text("Editar Usuário"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditUser(
+                              edituser: user[0],
+                            )));
+              }),
           ListTile(
             title: Text('Sign Out'),
             leading: FaIcon(FontAwesomeIcons.signOutAlt),
