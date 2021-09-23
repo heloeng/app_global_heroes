@@ -32,7 +32,7 @@ class CardHeroes extends StatelessWidget {
         Provider.of<UserController>(context, listen: false);
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
       child: GestureDetector(
         onTap: () {
           showDialog<void>(
@@ -66,16 +66,6 @@ class CardHeroes extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 2.0,
-                            spreadRadius: 1.0,
-                            color: Color(0xff30221f),
-                          ),
-                        ],
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
                       child: Image.network(
                         hero.image.url,
                         fit: BoxFit.cover,
@@ -83,7 +73,7 @@ class CardHeroes extends StatelessWidget {
                             StackTrace? stackTrace) {
                           return Image.asset(
                             'assets/no-image.jpeg',
-                            fit: BoxFit.fill,
+                            fit: BoxFit.contain,
                           );
                         },
                       ),

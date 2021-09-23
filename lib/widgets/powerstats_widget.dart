@@ -19,11 +19,12 @@ class _PowerstatsWidgetState extends State<PowerstatsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 35),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: EdgeInsets.only(top: 10),
             child: Text(widget.status),
           ),
           Row(

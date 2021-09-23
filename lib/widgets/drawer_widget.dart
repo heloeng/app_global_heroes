@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:file_picker/file_picker.dart';
 
 
+
 class DrawerWidget extends StatefulWidget {
   @override
   _DrawerWidgetState createState() => _DrawerWidgetState();
@@ -20,6 +21,8 @@ class DrawerWidget extends StatefulWidget {
 
 class _DrawerWidgetState extends State<DrawerWidget> {
    List<UserModel> user=[];
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +34,22 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       child: ListView(
         children: [
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('usuarios')
-            .where('key', isEqualTo: userController.user!.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
+              stream: FirebaseFirestore.instance
+                  .collection('usuarios')
+                  .where('key', isEqualTo: userController.user!.uid)
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                }
 
-           user = snapshot.data!.docs.map((map) {
-            final data = map.data();
-            return UserModel.fromMap(data);
-          }).toList();
+                user = snapshot.data!.docs.map((map) {
+                  final data = map.data();
+                  return UserModel.fromMap(data);
+                }).toList();
 
-          print("user ${user[0].nome}");
+
+         
               return 
                 GestureDetector(
               //      onTap: () async {
@@ -74,19 +78,25 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     accountName: Text(user[0].nome),
                     accountEmail: Text(user[0].email),
                   ),
-                );
-        
-        }
-      ),
 
+                );
+              }),
           ListTile(
-            title: Text("Favoritos"),
-            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>FavoritosPage()));}
-          ),
+              title: Text("Favoritos"),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => FavoritosPage()));
+              }),
           ListTile(
-            title: Text("Editar Usuário"),
-            onTap:(){Navigator.push(context, MaterialPageRoute(builder: (context)=>EditUser(edituser: user[0],)));}
-          ),
+              title: Text("Editar Usuário"),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditUser(
+                              edituser: user[0],
+                            )));
+              }),
           ListTile(
             title: Text('Sign Out'),
             leading: FaIcon(FontAwesomeIcons.signOutAlt),

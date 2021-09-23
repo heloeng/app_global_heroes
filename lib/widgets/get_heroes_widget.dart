@@ -30,6 +30,7 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.black87,
       width: double.infinity,
       height: double.infinity,
       child: Column(
@@ -80,7 +81,6 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                       //   fullName: heroe.biography.fullName,
                       //   hero: heroe,
                       // );
-
 
                       return AnimatedCard(
                         direction: AnimatedCardDirection
