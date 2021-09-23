@@ -1,4 +1,6 @@
 // ignore: unused_import
+import 'dart:typed_data';
+
 import 'package:app_global_heroes/pages/edit_user_page.dart';
 import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,16 +10,22 @@ import '../models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:file_picker/file_picker.dart';
 
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
+  @override
+  _DrawerWidgetState createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
    List<UserModel> user=[];
 
   @override
   Widget build(BuildContext context) {
     late final userController =
         Provider.of<UserController>(context, listen: false);
-
+ Uint8List? file;
     return Drawer(
       elevation: 30,
       child: ListView(
@@ -39,9 +47,33 @@ class DrawerWidget extends StatelessWidget {
 
           print("user ${user[0].nome}");
               return 
-                UserAccountsDrawerHeader(
-                  accountName: Text(user[0].nome),
-                  accountEmail: Text(user[0].email),
+                GestureDetector(
+              //      onTap: () async {
+              //   final result =
+              //     await FilePicker.platform.pickFiles(type: FileType.image);
+              // if(result != null) {
+              //   setState((){
+              //     final bytes = result.files.first.bytes;
+              //     file = bytes;
+              //   });
+              // }
+              // },
+                  
+                  child: UserAccountsDrawerHeader(
+                    currentAccountPicture: CircleAvatar(
+                    child: ClipOval(
+                      child: userController.model.image !=null
+                        ? Image.memory(
+                          userController.model.image!,
+                          width: 144,
+                          height: 144,
+                          fit:BoxFit.cover
+                          )
+                        : Icon(Icons.person),
+                       )),
+                    accountName: Text(user[0].nome),
+                    accountEmail: Text(user[0].email),
+                  ),
                 );
         
         }
