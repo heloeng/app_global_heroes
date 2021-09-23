@@ -10,6 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -41,7 +42,14 @@ late final userController = Provider.of<UserController>(
     return Scaffold(
       
       appBar: AppBar(
-        title: Text('Meus Heróis Favoritos '),
+          title:Text('FAVORITE HEROES',style: GoogleFonts.blackOpsOne(
+                            textStyle:
+                                TextStyle(fontSize:24, color: Colors.black,),
+                          ),
+                          ),
+        centerTitle: true,
+       
+        backgroundColor: Color(0xFFFB6C34),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance

@@ -19,6 +19,12 @@ class DrawerWidget extends StatelessWidget {
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
+                decoration: BoxDecoration(
+                // color: Color(0xFF1E392A),
+                image: DecorationImage(
+                  image: AssetImage("assets/hero1.jpg"),
+                     fit: BoxFit.fill)
+              ),
             accountName: Text(userController.model.nome),
             accountEmail: Text(userController.user!.email!),
           ),
