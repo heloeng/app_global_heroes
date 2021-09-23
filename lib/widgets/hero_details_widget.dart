@@ -27,7 +27,7 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
             children: [
               IconButton(
                   onPressed: () => Navigator.pop(context, 'Cancel'),
-                  icon: FaIcon(FontAwesomeIcons.solidTimesCircle)),
+                  icon: FaIcon(FontAwesomeIcons.solidWindowClose)),
             ],
           ),
           Column(
