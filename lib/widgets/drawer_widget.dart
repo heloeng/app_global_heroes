@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'dart:typed_data';
-
 import 'package:app_global_heroes/pages/edit_user_page.dart';
 import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +9,7 @@ import '../models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:file_picker/file_picker.dart';
+
 
 
 
@@ -28,7 +27,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   Widget build(BuildContext context) {
     late final userController =
         Provider.of<UserController>(context, listen: false);
- Uint8List? file;
     return Drawer(
       elevation: 30,
       child: ListView(
@@ -66,9 +64,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   child: UserAccountsDrawerHeader(
                     currentAccountPicture: CircleAvatar(
                     child: ClipOval(
-                      child: userController.model.image !=null
+                      child: user[0].image !=null
                         ? Image.memory(
-                          userController.model.image!,
+                          user[0].image!,
                           width: 144,
                           height: 144,
                           fit:BoxFit.cover
