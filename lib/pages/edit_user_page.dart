@@ -1,7 +1,9 @@
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:universal_platform/universal_platform.dart';
 import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
@@ -106,21 +108,40 @@ class _EditUserState extends State<EditUser> {
                         // ),
                         Container(
                           padding: EdgeInsets.all(20),
-                          child: ElevatedButton(
-                            onPressed:() async {
-                              final result = 
-                                await FilePicker.platform.pickFiles(type:FileType.image);
 
-                            if (result != null) {
-                              setState((){
-                                final bytes = result.files.first.bytes;
-                                file = bytes;
-                              });
-                            }
-                            },
-                            style: ElevatedButton.styleFrom(primary: Color(0XDD8e4fab)),
-                            child: Text("Add Imagem"),
-                          ),
+                              child: ElevatedButton(
+                onPressed: () async {
+                  final result =
+                      await FilePicker.platform.pickFiles(type: FileType.image);
+                  if (result != null) {
+                    //Esse if/else irá verificar a plataforma utilizada pelo usuário
+                    //para tratar a leitura da imagem.
+                    if (UniversalPlatform.isAndroid) {
+                      //path recebe o caminho da imagem na plataforma
+                      final path = result.files.first.path;
+                      //image cria um file.dart com o caminho da imagem
+                      final image = File(path!);
+                      //bytes coverte a imagem em bytes para subir para o firebase
+                      final bytes = await image.readAsBytes();
+                      file = bytes;
+                    } else if (UniversalPlatform.isWeb) {
+                      final bytes = result.files.first.bytes;
+                      print('Bytes: $bytes');
+                      file = bytes;
+                      print('File: $file');
+                    }
+
+                    // O setState deve permanecer, mesmo que vazio, para atualizar
+                    setState(() {});
+                  }
+                },
+                child: Row(
+                  children: [
+                    Icon(file != null ? Icons.check : Icons.upload),
+                    Text("Adicionar imagem"),
+                  ],
+                ),
+              ),
                         ),
                         Container(
                           padding: EdgeInsets.all(20),
