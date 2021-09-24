@@ -1,5 +1,6 @@
 import 'package:app_global_heroes/widgets/drawer_widget.dart';
 import 'package:app_global_heroes/widgets/get_heroes_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          title:Text('GLOBAL HEROES',style: GoogleFonts.blackOpsOne(
+                            textStyle:
+                                TextStyle(fontSize: 28, color: Color(0xFFa30000),),
+                          ),
+                          ),
+        centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.red),
+       
+        backgroundColor: Colors.black,
+      ),
       drawer: DrawerWidget(),
       body: GetHeroesWidget(),
     );

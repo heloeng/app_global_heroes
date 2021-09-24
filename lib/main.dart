@@ -1,4 +1,3 @@
-import 'package:app_global_heroes/pages/splash_page.dart';
 import 'package:app_global_heroes/widgets/splash_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
           // final themeProvider = Provider.of<ThemeProvider>(context);
 
           return MaterialApp(
-            title: 'Flutter Demo',
+            title: 'Global Heroes',
             theme: ThemeData(
               colorScheme: ColorScheme.dark(
                 primary: Colors.white,

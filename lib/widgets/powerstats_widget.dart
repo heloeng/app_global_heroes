@@ -19,11 +19,12 @@ class _PowerstatsWidgetState extends State<PowerstatsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 35),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 5),
+            padding: EdgeInsets.only(top: 10),
             child: Text(widget.status),
           ),
           Row(
@@ -33,7 +34,7 @@ class _PowerstatsWidgetState extends State<PowerstatsWidget> {
                   leading: Text(''),
                   animation: true,
                   lineHeight: 18.0,
-                  animationDuration: 500,
+                  animationDuration: 2000,
                   percent: (double.parse(widget.valor) / 100),
                   center: Text(
                     widget.valor,

@@ -10,18 +10,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-
-
+import 'package:google_fonts/google_fonts.dart';
 
 class FavoritosPage extends StatefulWidget {
-  const FavoritosPage({ Key? key }) : super(key: key);
+  const FavoritosPage({Key? key}) : super(key: key);
 
   @override
   _FavoritosPageState createState() => _FavoritosPageState();
 }
 
 class _FavoritosPageState extends State<FavoritosPage> {
-late final userController = Provider.of<UserController>(
+  late final userController = Provider.of<UserController>(
     context,
     listen: false,
   );
@@ -30,7 +29,7 @@ late final userController = Provider.of<UserController>(
     var url = Uri.parse(
         'https://www.superheroapi.com/api.php/2341455595984511/$heroId');
     final response = await http.get(url);
-  
+
     Heroe heroes = Heroe.fromJson(jsonDecode(response.body));
     print("Heroes ${heroes.name}");
     return heroes;
@@ -39,9 +38,18 @@ late final userController = Provider.of<UserController>(
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       appBar: AppBar(
-        title: Text('Meus Heróis Favoritos '),
+        title: Text(
+          'FAVORITE HEROES',
+          style: GoogleFonts.blackOpsOne(
+            textStyle: TextStyle(
+              fontSize: 24,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFFFB6C34),
       ),
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: FirebaseFirestore.instance
@@ -58,47 +66,45 @@ late final userController = Provider.of<UserController>(
             return UserModel.fromMap(data);
           }).toList();
 
-          return ListView.builder(
-            itemCount: usuarios[0].favoritos!.length,
-            itemBuilder: (context, index) {
-              late final favorito = usuarios[0].favoritos![index];
-              print("favorito ${favorito}");
-              return
-              FutureBuilder<Heroe>(
-              future: fetch(favorito),
-              builder: (context, snapshot) {
-                print("Data ${snapshot.data}");
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text('Erro ao carregar os heróis.'),
+          return Container(
+            color: Colors.black87,
+            child: ListView.builder(
+                itemCount: usuarios[0].favoritos!.length,
+                itemBuilder: (context, index) {
+                  late final favorito = usuarios[0].favoritos![index];
+                  return FutureBuilder<Heroe>(
+                    future: fetch(favorito),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Center(
+                          child: Text('Erro ao carregar os heróis.'),
+                        );
+                      }
+                      if (snapshot.hasData) {
+                        final Heroe hero = snapshot.data!;
+                        return AnimatedCard(
+                          direction: AnimatedCardDirection
+                              .right, //Initial animation direction
+                          initDelay: Duration(
+                              milliseconds: 500), //Delay to initial animation
+                          duration: Duration(milliseconds: 1000),
+                          child: CardHeroes(
+                            screenHeight: MediaQuery.of(context).size.height,
+                            fotoUrl: hero.image.url,
+                            id: hero.id,
+                            name: hero.name,
+                            fullName: hero.biography.fullName,
+                            hero: hero,
+                          ),
+                        );
+                      }
+
+                      return Center(
+                        child: Text(""),
+                      );
+                    },
                   );
-                }
-                if (snapshot.hasData) {
-                  final Heroe hero = snapshot.data! ;
-                   return AnimatedCard(
-                    direction: AnimatedCardDirection
-                        .right, //Initial animation direction
-                    initDelay: Duration(
-                        milliseconds: 500), //Delay to initial animation
-                    duration: Duration(milliseconds: 1000),
-                    child: CardHeroes(
-                      screenHeight: MediaQuery.of(context).size.height,
-                      fotoUrl: hero.image.url,
-                      id: hero.id,
-                      name: hero.name,
-                      fullName: hero.biography.fullName,
-                      hero: hero,
-                    ),
-                  );
-                };
-                
-              
-                return Center(
-                  child: Text(""),
-                );
-              },
-            );
-            }
+                }),
           );
         },
       ),
