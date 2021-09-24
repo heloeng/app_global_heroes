@@ -86,9 +86,8 @@ class _EditUserState extends State<EditUser> {
                                       file = bytes;
                                     } else if (UniversalPlatform.isWeb) {
                                       final bytes = result.files.first.bytes;
-                                      print('Bytes: $bytes');
+
                                       file = bytes;
-                                      print('File: $file');
                                     }
 
                                     setState(() {});
@@ -142,7 +141,7 @@ class _EditUserState extends State<EditUser> {
                               child: ElevatedButton(
                                 onPressed: () async {},
                                 child: Text("Excluir conta"),
-                                 style: ElevatedButton.styleFrom(
+                                style: ElevatedButton.styleFrom(
                                     primary: Color(0xFFcc0000)),
                               ),
                             ),
