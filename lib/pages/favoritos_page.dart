@@ -72,11 +72,9 @@ class _FavoritosPageState extends State<FavoritosPage> {
                 itemCount: usuarios[0].favoritos!.length,
                 itemBuilder: (context, index) {
                   late final favorito = usuarios[0].favoritos![index];
-                  print("favorito ${favorito}");
                   return FutureBuilder<Heroe>(
                     future: fetch(favorito),
                     builder: (context, snapshot) {
-                      print("Data ${snapshot.data}");
                       if (snapshot.hasError) {
                         return Center(
                           child: Text('Erro ao carregar os heróis.'),
@@ -100,7 +98,6 @@ class _FavoritosPageState extends State<FavoritosPage> {
                           ),
                         );
                       }
-                      ;
 
                       return Center(
                         child: Text(""),
