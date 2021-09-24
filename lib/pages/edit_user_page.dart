@@ -77,7 +77,6 @@ class _EditUserState extends State<EditUser> {
                                       print('File: $file');
                                     }
 
-
                                     setState(() {});
                                   } else {
                                     file = widget.edituser.image;
@@ -93,12 +92,10 @@ class _EditUserState extends State<EditUser> {
                                 ),
                               ),
                             ),
-
                             Container(
                               padding: EdgeInsets.all(20),
                               child: ElevatedButton(
                                 onPressed: () async {
-
                                   if (_formKey.currentState?.validate() ??
                                       false) {
                                     final user = UserModel(
@@ -122,33 +119,16 @@ class _EditUserState extends State<EditUser> {
                                 child: Text("Editar usuário"),
                               ),
                             ),
-
-                         
-                                      
-                        Container(
+                            Container(
                               padding: EdgeInsets.all(20),
                               child: ElevatedButton(
-                                onPressed: () async {
-                                
-                                
-                                  },
-                                
-                            
+                                onPressed: () async {},
                                 child: Text("Excluir conta"),
                               ),
                             ),
-                        ],
-                     
-                        ),
-                     
-                   
-                     
-                      ],
-
                           ],
                         ),
                       ),
-
                     ),
                   ],
                 ),
