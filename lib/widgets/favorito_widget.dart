@@ -18,6 +18,7 @@ class FavoritoWidget extends StatefulWidget {
 }
 
 class _FavoritoWidgetState extends State<FavoritoWidget> {
+  UserModel? user;
   late final userController =
       Provider.of<UserController>(context, listen: false);
   @override
@@ -34,15 +35,14 @@ class _FavoritoWidgetState extends State<FavoritoWidget> {
             );
           }
 
-          final usuarios = snapshot.data!.docs.map((map) {
-            final data = map.data();
-            return UserModel.fromMap(data);
-          }).toList();
+          snapshot.data!.docs.forEach((element) {
+            user = UserModel.fromMap(element.data());
+          });
 
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: FaIcon(
-              usuarios[0].favoritos!.contains(widget.hero.id)
+              user!.favoritos!.contains(widget.hero.id)
                   ? FontAwesomeIcons.solidStar
                   : FontAwesomeIcons.star,
               size: 20,
