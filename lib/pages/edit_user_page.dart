@@ -143,30 +143,67 @@ class _EditUserState extends State<EditUser> {
                 ),
               ),
                         ),
+                      
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_formKey.currentState?.validate() ?? false) {
+                                    final List<String> favoritos = [];
+                                    final user = UserModel(
+                                        key: userController.model.key,
+                                        nome: nomeCont.text,
+                                        email: userController.model.email,
+                                        nickName: nickNameCont.text,
+                                        favoritos: favoritos,
+                                        image:file
+                                        ).toMap();
+                                    await FirebaseFirestore.instance
+                                        .collection('usuarios')
+                                        .doc(userController.user!.uid)
+                                        .update(user);
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: Text("Editar usuário"),
+                              ),
+                            ),
+                          
+                                        
+                                         
                         Container(
-                          padding: EdgeInsets.all(20),
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState?.validate() ?? false) {
-                                final List<String> favoritos = [];
-                                final user = UserModel(
-                                    key: userController.model.key,
-                                    nome: nomeCont.text,
-                                    email: userController.model.email,
-                                    nickName: nickNameCont.text,
-                                    favoritos: favoritos,
-                                    image:file
-                                    ).toMap();
-                                await FirebaseFirestore.instance
-                                    .collection('usuarios')
-                                    .doc(userController.user!.uid)
-                                    .update(user);
-                                Navigator.pop(context);
-                              }
-                            },
-                            child: Text("Editar usuário"),
-                          ),
+                              padding: EdgeInsets.all(20),
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                
+                                
+                                  },
+                                
+                            
+                                child: Text("Excluir conta"),
+                              ),
+                            ),
+                        ],
+                     
                         ),
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
+                     
                       ],
                     ),
                   ),
