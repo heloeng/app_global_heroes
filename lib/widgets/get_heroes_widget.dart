@@ -46,8 +46,6 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                 if (heroName == "") {
                   heroName = 'a';
                 } else {
-                  print('mostrar texto: $wordToFilter');
-
                   fetch().then((value) {
                     setState(() {});
                   });

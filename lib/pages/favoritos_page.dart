@@ -31,7 +31,6 @@ class _FavoritosPageState extends State<FavoritosPage> {
     final response = await http.get(url);
 
     Heroe heroes = Heroe.fromJson(jsonDecode(response.body));
-    print("Heroes ${heroes.name}");
     return heroes;
   }
 
