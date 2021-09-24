@@ -150,11 +150,12 @@ class CardHeroes extends StatelessWidget {
                                   }
 
                                   final novoUsuario = UserModel(
-                                    nome: userController.model.nome,
-                                    email: userController.model.email,
-                                    nickName: userController.model.nickName,
+                                    nome: atualUsuario.nome,
+                                    email: atualUsuario.email,
+                                    nickName: atualUsuario.nickName,
                                     key: userController.user!.uid,
                                     favoritos: atualUsuario.favoritos,
+                                    image: atualUsuario.image,
                                   ).toMap();
 
                                   FirebaseFirestore.instance
