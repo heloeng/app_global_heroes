@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:universal_platform/universal_platform.dart';
 import '../models/user_model.dart';
@@ -33,7 +34,19 @@ class _EditUserState extends State<EditUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'EDITAR USUÁRIO',
+          style: GoogleFonts.blackOpsOne(
+            textStyle: TextStyle(
+              fontSize: 24,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Color(0xFFFB6C34),
+      ),
       body: Column(
         children: [
           Expanded(
@@ -58,6 +71,7 @@ class _EditUserState extends State<EditUser> {
                               decoration:
                                   InputDecoration(labelText: 'Nickname'),
                             ),
+                            const SizedBox(height: 80),
                             Container(
                               padding: EdgeInsets.all(20),
                               child: ElevatedButton(
@@ -82,6 +96,8 @@ class _EditUserState extends State<EditUser> {
                                     file = widget.edituser.image;
                                   }
                                 },
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xFFFB6C34)),
                                 child: Row(
                                   children: [
                                     Icon(file != null
@@ -116,6 +132,8 @@ class _EditUserState extends State<EditUser> {
                                     Navigator.pop(context);
                                   }
                                 },
+                                style: ElevatedButton.styleFrom(
+                                    primary: Color(0xffd17842)),
                                 child: Text("Editar usuário"),
                               ),
                             ),
@@ -124,6 +142,8 @@ class _EditUserState extends State<EditUser> {
                               child: ElevatedButton(
                                 onPressed: () async {},
                                 child: Text("Excluir conta"),
+                                 style: ElevatedButton.styleFrom(
+                                    primary: Color(0xFFcc0000)),
                               ),
                             ),
                           ],
