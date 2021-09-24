@@ -16,13 +16,13 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
           title:Text('GLOBAL HEROES',style: GoogleFonts.blackOpsOne(
                             textStyle:
-                                TextStyle(fontSize: 28, color: Color(0xFFa30000),),
+                                TextStyle(fontSize: 28, color: Color(0xFF000000),),
                           ),
                           ),
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.red),
+        iconTheme: IconThemeData(color: Color(0xFF000000)),
        
-        backgroundColor: Colors.black,
+       backgroundColor: Color(0xFFFB6C34),
       ),
       drawer: DrawerWidget(),
       body: GetHeroesWidget(),

@@ -44,6 +44,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   }).toList();
 
                   return UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                        // color: Color(0xFF1E392A),
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "assets/giphy4.gif",
+                            ),
+                            fit: BoxFit.fill)),
                     currentAccountPicture: CircleAvatar(
                         child: ClipOval(
                       child: user[0].image != null
@@ -57,14 +64,20 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 }),
             ListTile(
                 title: Text("Favoritos"),
-                leading: FaIcon(FontAwesomeIcons.solidStar),
+                leading: FaIcon(
+                  FontAwesomeIcons.solidStar,
+                  color: Color(0xffd17842),
+                ),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => FavoritosPage()));
                 }),
             ListTile(
                 title: Text("Editar Usuário"),
-                leading: FaIcon(FontAwesomeIcons.userAlt),
+                leading: FaIcon(
+                  FontAwesomeIcons.userAlt,
+                  color: Color(0xffd17842),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
@@ -74,8 +87,11 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               )));
                 }),
             ListTile(
-              title: Text('Sign Out'),
-              leading: FaIcon(FontAwesomeIcons.signOutAlt),
+              title: Text('Sair'),
+              leading: FaIcon(
+                FontAwesomeIcons.signOutAlt,
+                color: Color(0xffd17842),
+              ),
               onTap: () async {
                 // await userController.logout();
 
