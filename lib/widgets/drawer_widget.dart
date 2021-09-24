@@ -16,7 +16,7 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  List<UserModel> user = [];
+  UserModel? user;
 
   @override
   Widget build(BuildContext context) {
@@ -38,44 +38,59 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     return Center(child: CircularProgressIndicator());
                   }
 
-                  user = snapshot.data!.docs.map((map) {
-                    final data = map.data();
-                    return UserModel.fromMap(data);
-                  }).toList();
+                  snapshot.data!.docs.forEach((element) {
+                    user = UserModel.fromMap(element.data());
+                  });
 
                   return UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(
+                        // color: Color(0xFF1E392A),
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "assets/giphy4.gif",
+                            ),
+                            fit: BoxFit.fill)),
                     currentAccountPicture: CircleAvatar(
                         child: ClipOval(
-                      child: user[0].image != null
-                          ? Image.memory(user[0].image!,
+                      child: user!.image != null
+                          ? Image.memory(user!.image!,
                               width: 144, height: 144, fit: BoxFit.cover)
                           : Icon(Icons.person),
                     )),
-                    accountName: Text(user[0].nome),
-                    accountEmail: Text(user[0].email),
+                    accountName: Text(user!.nome),
+                    accountEmail: Text(user!.email),
                   );
                 }),
             ListTile(
                 title: Text("Favoritos"),
-                leading: FaIcon(FontAwesomeIcons.solidStar),
+                leading: FaIcon(
+                  FontAwesomeIcons.solidStar,
+                  color: Color(0xffd17842),
+                ),
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => FavoritosPage()));
                 }),
             ListTile(
                 title: Text("Editar Usuário"),
-                leading: FaIcon(FontAwesomeIcons.userAlt),
+                leading: FaIcon(
+                  FontAwesomeIcons.userAlt,
+                  color: Color(0xffd17842),
+                ),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => EditUser(
-                                edituser: user[0],
+                                edituser: user!,
                               )));
                 }),
             ListTile(
-              title: Text('Sign Out'),
-              leading: FaIcon(FontAwesomeIcons.signOutAlt),
+              title: Text('Sair'),
+              leading: FaIcon(
+                FontAwesomeIcons.signOutAlt,
+                color: Color(0xffd17842),
+              ),
               onTap: () async {
                 // await userController.logout();
 
