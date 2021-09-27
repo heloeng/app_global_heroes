@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:app_global_heroes/pages/splash_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -114,9 +115,9 @@ class _EditUserState extends State<EditUser> {
                                   if (_formKey.currentState?.validate() ??
                                       false) {
                                     final user = UserModel(
-                                      key: userController.model.key,
+                                      key: widget.edituser.key,
                                       nome: nomeCont.text,
-                                      email: userController.model.email,
+                                      email: widget.edituser.email,
                                       nickName: nickNameCont.text,
                                       favoritos: widget.edituser.favoritos,
                                       image: file == null
@@ -138,23 +139,77 @@ class _EditUserState extends State<EditUser> {
                             ),
                             Container(
                               padding: EdgeInsets.all(20),
-
                               child: TextButton(
                                 onPressed: () async {
-                                                                   
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text("Excluir Conta"),
+                                          content:
+                                              Text("Deseja excluir sua conta?"),
+                                          actions: <Widget>[
+                                            ElevatedButton(
+                                              child: Text('Sim'),
+                                              onPressed: () async {
+                                                await userController.delete();
 
+                                                showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (BuildContext context) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            "Conta excluída"),
+                                                        content: Text(
+                                                            "Clique em OK para voltar a página inicial"),
+                                                        actions: <Widget>[
+                                                          ElevatedButton(
+                                                              child: Text('ok'),
+                                                              onPressed: () {
+                                                                Navigator
+                                                                    .pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            SplashPage(),
+                                                                  ),
+                                                                );
+                                                              }),
+                                                        ],
+                                                      );
+                                                    });
+
+                                                // Navigator.pushReplacement(
+                                                //   context,
+                                                //   MaterialPageRoute(
+                                                //     builder: (context) =>
+                                                //         SplashPage(),
+                                                //   ),
+                                                // );
+                                              },
+                                            ),
+                                            ElevatedButton(
+                                              child: Text('Não'),
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                            ),
+                                          ],
+                                        );
+                                      });
                                 },
                                 child: Text(
                                   "Excluir conta",
                                   style: GoogleFonts.blackOpsOne(
                                     textStyle: TextStyle(
                                       fontSize: 20,
-                                      color:Color(0xFFcc0000),
+                                      color: Color(0xFFcc0000),
                                     ),
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
-
                                     primary: Color(0xFFcc0000)),
                               ),
                             ),

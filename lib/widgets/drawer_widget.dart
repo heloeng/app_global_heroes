@@ -57,7 +57,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               width: 144, height: 144, fit: BoxFit.cover)
                           : Icon(Icons.person),
                     )),
-
                     accountName: Text(user!.nome,
                         style: TextStyle(
                           color: Colors.white,
@@ -66,11 +65,10 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         style: TextStyle(
                           color: Colors.white,
                         )),
-
                   );
                 }),
             ListTile(
-              hoverColor: (Color(0xffd17842)),
+                hoverColor: (Color(0xffd17842)),
                 title: Text("Favoritos"),
                 leading: FaIcon(
                   FontAwesomeIcons.solidStar,
@@ -81,7 +79,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       MaterialPageRoute(builder: (context) => FavoritosPage()));
                 }),
             ListTile(
-              hoverColor: (Color(0xffd17842)),
+                hoverColor: (Color(0xffd17842)),
                 title: Text("Editar Usuário"),
                 leading: FaIcon(
                   FontAwesomeIcons.userAlt,
@@ -120,8 +118,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             },
                           ),
                           ElevatedButton(
-                            // color: Colors.blueAccent,
-                            // child: Text('Não', style: TextStyle(color: Colors.white),),
                             child: Text('Não'),
                             onPressed: () {
                               Navigator.of(context).pop();
