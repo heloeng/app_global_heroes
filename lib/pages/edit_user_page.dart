@@ -86,9 +86,8 @@ class _EditUserState extends State<EditUser> {
                                       file = bytes;
                                     } else if (UniversalPlatform.isWeb) {
                                       final bytes = result.files.first.bytes;
-                                      print('Bytes: $bytes');
+
                                       file = bytes;
-                                      print('File: $file');
                                     }
 
                                     setState(() {});
@@ -139,6 +138,7 @@ class _EditUserState extends State<EditUser> {
                             ),
                             Container(
                               padding: EdgeInsets.all(20),
+
                               child: TextButton(
                                 onPressed: () async {
                                                                    
@@ -154,6 +154,7 @@ class _EditUserState extends State<EditUser> {
                                   ),
                                 ),
                                 style: TextButton.styleFrom(
+
                                     primary: Color(0xFFcc0000)),
                               ),
                             ),

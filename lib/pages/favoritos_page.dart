@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:animated_card/animated_card.dart';
 import 'package:app_global_heroes/controllers/user_controller.dart';
 import 'package:app_global_heroes/models/heroe_model.dart';
-import 'package:app_global_heroes/models/search_result_model.dart';
 import 'package:app_global_heroes/models/user_model.dart';
 import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +19,7 @@ class FavoritosPage extends StatefulWidget {
 }
 
 class _FavoritosPageState extends State<FavoritosPage> {
+  UserModel? user;
   late final userController = Provider.of<UserController>(
     context,
     listen: false,
@@ -31,7 +31,6 @@ class _FavoritosPageState extends State<FavoritosPage> {
     final response = await http.get(url);
 
     Heroe heroes = Heroe.fromJson(jsonDecode(response.body));
-    print("Heroes ${heroes.name}");
     return heroes;
   }
 
@@ -40,7 +39,7 @@ class _FavoritosPageState extends State<FavoritosPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'FAVORITE HEROES',
+          'FAVORITOS',
           style: GoogleFonts.blackOpsOne(
             textStyle: TextStyle(
               fontSize: 24,
@@ -61,50 +60,50 @@ class _FavoritosPageState extends State<FavoritosPage> {
             return Center(child: CircularProgressIndicator());
           }
 
-          final usuarios = snapshot.data!.docs.map((map) {
-            final data = map.data();
-            return UserModel.fromMap(data);
-          }).toList();
+          snapshot.data!.docs.forEach((element) {
+            user = UserModel.fromMap(element.data());
+          });
 
           return Container(
             color: Colors.black87,
             child: ListView.builder(
-                itemCount: usuarios[0].favoritos!.length,
-                itemBuilder: (context, index) {
-                  late final favorito = usuarios[0].favoritos![index];
-                  return FutureBuilder<Heroe>(
-                    future: fetch(favorito),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Center(
-                          child: Text('Erro ao carregar os heróis.'),
-                        );
-                      }
-                      if (snapshot.hasData) {
-                        final Heroe hero = snapshot.data!;
-                        return AnimatedCard(
-                          direction: AnimatedCardDirection
-                              .right, //Initial animation direction
-                          initDelay: Duration(
-                              milliseconds: 500), //Delay to initial animation
-                          duration: Duration(milliseconds: 1000),
-                          child: CardHeroes(
-                            screenHeight: MediaQuery.of(context).size.height,
-                            fotoUrl: hero.image.url,
-                            id: hero.id,
-                            name: hero.name,
-                            fullName: hero.biography.fullName,
-                            hero: hero,
-                          ),
-                        );
-                      }
-
+              itemCount: user!.favoritos!.length,
+              itemBuilder: (context, index) {
+                late final favorito = user!.favoritos![index];
+                return FutureBuilder<Heroe>(
+                  future: fetch(favorito),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
                       return Center(
-                        child: Text(""),
+                        child: Text('Erro ao carregar os heróis.'),
                       );
-                    },
-                  );
-                }),
+                    }
+                    if (snapshot.hasData) {
+                      final Heroe hero = snapshot.data!;
+                      return AnimatedCard(
+                        direction: AnimatedCardDirection
+                            .right, //Initial animation direction
+                        initDelay: Duration(
+                            milliseconds: 500), //Delay to initial animation
+                        duration: Duration(milliseconds: 1000),
+                        child: CardHeroes(
+                          screenHeight: MediaQuery.of(context).size.height,
+                          fotoUrl: hero.image.url,
+                          id: hero.id,
+                          name: hero.name,
+                          fullName: hero.biography.fullName,
+                          hero: hero,
+                        ),
+                      );
+                    }
+
+                    return Center(
+                      child: Text(""),
+                    );
+                  },
+                );
+              },
+            ),
           );
         },
       ),

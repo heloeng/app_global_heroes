@@ -16,7 +16,7 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  List<UserModel> user = [];
+  UserModel? user;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +38,9 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     return Center(child: CircularProgressIndicator());
                   }
 
-                  user = snapshot.data!.docs.map((map) {
-                    final data = map.data();
-                    return UserModel.fromMap(data);
-                  }).toList();
+                  snapshot.data!.docs.forEach((element) {
+                    user = UserModel.fromMap(element.data());
+                  });
 
                   return UserAccountsDrawerHeader(
                     decoration: BoxDecoration(
@@ -53,19 +52,21 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                             fit: BoxFit.fill)),
                     currentAccountPicture: CircleAvatar(
                         child: ClipOval(
-                      child: user[0].image != null
-                          ? Image.memory(user[0].image!,
+                      child: user!.image != null
+                          ? Image.memory(user!.image!,
                               width: 144, height: 144, fit: BoxFit.cover)
                           : Icon(Icons.person),
                     )),
-                    accountName: Text(user[0].nome,
+
+                    accountName: Text(user!.nome,
                         style: TextStyle(
                           color: Colors.white,
                         )),
-                    accountEmail: Text(user[0].email,
+                    accountEmail: Text(user!.email,
                         style: TextStyle(
                           color: Colors.white,
                         )),
+
                   );
                 }),
             ListTile(
@@ -91,7 +92,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => EditUser(
-                                edituser: user[0],
+                                edituser: user!,
                               )));
                 }),
             ListTile(
