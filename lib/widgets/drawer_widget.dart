@@ -47,7 +47,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         // color: Color(0xFF1E392A),
                         image: DecorationImage(
                             image: AssetImage(
-                              "assets/giphy4.gif",
+                              "assets/gif.gif",
                             ),
                             fit: BoxFit.fill)),
                     currentAccountPicture: CircleAvatar(
@@ -57,11 +57,20 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               width: 144, height: 144, fit: BoxFit.cover)
                           : Icon(Icons.person),
                     )),
-                    accountName: Text(user!.nome),
-                    accountEmail: Text(user!.email),
+
+                    accountName: Text(user!.nome,
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+                    accountEmail: Text(user!.email,
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+
                   );
                 }),
             ListTile(
+              hoverColor: (Color(0xffd17842)),
                 title: Text("Favoritos"),
                 leading: FaIcon(
                   FontAwesomeIcons.solidStar,
@@ -72,6 +81,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       MaterialPageRoute(builder: (context) => FavoritosPage()));
                 }),
             ListTile(
+              hoverColor: (Color(0xffd17842)),
                 title: Text("Editar Usuário"),
                 leading: FaIcon(
                   FontAwesomeIcons.userAlt,
@@ -86,6 +96,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               )));
                 }),
             ListTile(
+              hoverColor: (Color(0xffd17842)),
               title: Text('Sair'),
               leading: FaIcon(
                 FontAwesomeIcons.signOutAlt,

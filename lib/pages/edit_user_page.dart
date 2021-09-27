@@ -138,10 +138,23 @@ class _EditUserState extends State<EditUser> {
                             ),
                             Container(
                               padding: EdgeInsets.all(20),
-                              child: ElevatedButton(
-                                onPressed: () async {},
-                                child: Text("Excluir conta"),
-                                style: ElevatedButton.styleFrom(
+
+                              child: TextButton(
+                                onPressed: () async {
+                                                                   
+
+                                },
+                                child: Text(
+                                  "Excluir conta",
+                                  style: GoogleFonts.blackOpsOne(
+                                    textStyle: TextStyle(
+                                      fontSize: 20,
+                                      color:Color(0xFFcc0000),
+                                    ),
+                                  ),
+                                ),
+                                style: TextButton.styleFrom(
+
                                     primary: Color(0xFFcc0000)),
                               ),
                             ),
