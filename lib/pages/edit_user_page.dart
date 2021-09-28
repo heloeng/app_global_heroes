@@ -171,7 +171,11 @@ class _EditUserState extends State<EditUser> {
                                             Text("Deseja excluir sua conta?"),
                                         actions: <Widget>[
                                           ElevatedButton(
-                                            child: Text('Sim'),
+                                            child: Text(
+                                              'Sim',
+                                              style: TextStyle(
+                                                  color: Colors.black),
+                                            ),
                                             onPressed: () async {
                                               await userController.delete();
 
@@ -180,10 +184,8 @@ class _EditUserState extends State<EditUser> {
                                                 builder:
                                                     (BuildContext context) {
                                                   return AlertDialog(
-                                                    title:
-                                                        Text("Conta excluída"),
                                                     content: Text(
-                                                        "Clique em OK para voltar a página inicial"),
+                                                        "Conta excluída com sucesso"),
                                                     actions: <Widget>[
                                                       ElevatedButton(
                                                         child: Text('ok'),
@@ -203,12 +205,16 @@ class _EditUserState extends State<EditUser> {
                                                 },
                                               );
                                             },
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Color(0xFFcc0000)),
                                           ),
                                           ElevatedButton(
                                             child: Text('Não'),
                                             onPressed: () {
                                               Navigator.of(context).pop();
                                             },
+                                            style: ElevatedButton.styleFrom(
+                                                primary: Color(0xffd17842)),
                                           ),
                                         ],
                                       );
