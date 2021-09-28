@@ -135,8 +135,8 @@ class _SignupPageState extends State<SignupPage> {
                               obscureText: true,
                               validator: (String? texto) {
                                 if (texto != null && texto.isNotEmpty) {
-                                  if (texto.length < 6) {
-                                    return "Digite uma senha com 6 caracteres ou mais";
+                                  if (texto != senha) {
+                                    return "A senha não confere";
                                   }
                                 } else {
                                   return "Campo obrigatório";
