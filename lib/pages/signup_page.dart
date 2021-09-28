@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
@@ -47,7 +48,7 @@ class _SignupPageState extends State<SignupPage> {
                           children: [
                             TextFormField(
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.person_add_alt),
+                                  prefixIcon: Icon(Icons.person_add_alt, color: Color(0xffd17842),),
                                   labelText: 'Nome'),
                               onChanged: (texto) => nome = texto,
                               validator: (String? texto) {
@@ -76,14 +77,14 @@ class _SignupPageState extends State<SignupPage> {
                               keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
-                                  Icons.mail_outline,
+                                  Icons.mail_outline, color: Color(0xffd17842),
                                 ),
                                 labelText: 'Email',
                               ),
                             ),
                             TextFormField(
                               decoration: InputDecoration(
-                                  prefixIcon: Icon(Icons.person_add_alt),
+                                  prefixIcon: Icon(Icons.person_add_alt, color: Color(0xffd17842),),
                                   labelText: 'Nickname'),
                               onChanged: (texto) => nickName = texto,
                               validator: (String? texto) {
@@ -101,7 +102,7 @@ class _SignupPageState extends State<SignupPage> {
                               obscureText: true,
                               decoration: InputDecoration(
                                 prefixIcon:
-                                    Icon(Icons.enhanced_encryption_outlined),
+                                    Icon(Icons.enhanced_encryption_outlined, color: Color(0xffd17842),),
                                 labelText: 'Senha',
                               ),
                               validator: (String? texto) {
@@ -117,7 +118,7 @@ class _SignupPageState extends State<SignupPage> {
                             TextFormField(
                               decoration: InputDecoration(
                                   prefixIcon:
-                                      Icon(Icons.enhanced_encryption_outlined),
+                                      Icon(Icons.enhanced_encryption_outlined, color: Color(0xffd17842),),
                                   labelText: 'Confirmar Senha'),
                               onChanged: (texto) => confirmarSenha = texto,
                               obscureText: true,
@@ -131,6 +132,7 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                               },
                             ),
+                             const SizedBox(height: 20),
                             Container(
                               padding: EdgeInsets.all(20),
                               child: ElevatedButton(
@@ -166,8 +168,11 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                 },
                                 child: Text("Criar conta"),
+                                 style: ElevatedButton.styleFrom(
+                                  primary: Color(0xffd17842)),
                               ),
                             ),
+                            
                             Container(
                               margin: EdgeInsets.only(top: 15),
                               child: OutlinedButton(
@@ -179,7 +184,12 @@ class _SignupPageState extends State<SignupPage> {
                                     ),
                                   );
                                 },
-                                child: Text("Tenho Cadastro"),
+                                child: Text("Tenho Cadastro", style: GoogleFonts.blackOpsOne(
+                                  textStyle: TextStyle(
+                                    fontSize: 24,
+                                    color: Color(0xFFFB6C34),
+                                  ),
+                                ),),
                               ),
                             ),
                           ],
