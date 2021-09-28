@@ -27,6 +27,21 @@ class _SignupPageState extends State<SignupPage> {
     listen: false,
   );
 
+  bool obscureTextPassword = true;
+  bool obscureTextConfirmPassword = true;
+
+  void changeVisibilityPassword() {
+    setState(() {
+      obscureTextPassword = !obscureTextPassword;
+    });
+  }
+
+  void changeVisibilityConfirmPassword() {
+    setState(() {
+      obscureTextConfirmPassword = !obscureTextConfirmPassword;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Cria o widget Form usando  _formKey
@@ -106,11 +121,17 @@ class _SignupPageState extends State<SignupPage> {
                             ),
                             TextFormField(
                               onChanged: (texto) => senha = texto,
-                              obscureText: true,
+                              obscureText: obscureTextPassword,
                               decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.enhanced_encryption_outlined,
                                   color: Color(0xffd17842),
+                                ),
+                                suffixIcon: IconButton(
+                                  onPressed: changeVisibilityPassword,
+                                  icon: obscureTextPassword
+                                      ? Icon(Icons.visibility_off)
+                                      : Icon(Icons.visibility),
                                 ),
                                 labelText: 'Senha',
                               ),
@@ -130,9 +151,15 @@ class _SignupPageState extends State<SignupPage> {
                                     Icons.enhanced_encryption_outlined,
                                     color: Color(0xffd17842),
                                   ),
+                                  suffixIcon: IconButton(
+                                    onPressed: changeVisibilityConfirmPassword,
+                                    icon: obscureTextConfirmPassword
+                                        ? Icon(Icons.visibility_off)
+                                        : Icon(Icons.visibility),
+                                  ),
                                   labelText: 'Confirmar Senha'),
                               onChanged: (texto) => confirmarSenha = texto,
-                              obscureText: true,
+                              obscureText: obscureTextConfirmPassword,
                               validator: (String? texto) {
                                 if (texto != null && texto.isNotEmpty) {
                                   if (texto != senha) {
