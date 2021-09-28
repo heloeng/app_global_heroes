@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             onChanged: (texto) => senha = texto,
                           ),
-                           const SizedBox(height: 15),
+                          const SizedBox(height: 15),
                           Container(
                             margin: EdgeInsets.only(top: 30),
                             child: ElevatedButton(
@@ -118,6 +118,41 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: Text(
                                 "Cadastrar",
+                                style: GoogleFonts.blackOpsOne(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFFFB6C34),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: OutlinedButton(
+                              onPressed: () async {
+                                try {
+                                  await userController.updateSenha(email);
+                                } on FirebaseAuthException catch (e) {
+                                  var msg = "";
+                                  if (e.code == "invalid-email") {
+                                    msg = "Email inválido";
+                                  } else if (e.code == "user-not-found") {
+                                    msg = "usuário não cadastrado";
+                                  } else {
+                                    msg =
+                                        "ocorreu um erro ";
+                                    print(msg);
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(msg),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: Text(
+                                "Esqueci a senha",
                                 style: GoogleFonts.blackOpsOne(
                                   textStyle: TextStyle(
                                     fontSize: 20,

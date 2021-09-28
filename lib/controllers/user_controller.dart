@@ -73,4 +73,8 @@ class UserController extends ChangeNotifier {
         .doc(user!.uid)
         .update(newUser);
   }
+
+  Future<void> updateSenha(String email) async {
+    await _auth.sendPasswordResetEmail(email: email);
+  }
 }
