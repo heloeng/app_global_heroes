@@ -74,7 +74,12 @@ class UserController extends ChangeNotifier {
         .update(newUser);
   }
 
-  Future<void> updateSenha(String email) async {
+  Future<void> updateSenha(String email, context) async {
     await _auth.sendPasswordResetEmail(email: email);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Email enviado com sucesso!'),
+      ),
+    );
   }
 }
