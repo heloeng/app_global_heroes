@@ -25,6 +25,7 @@ class _EditUserState extends State<EditUser> {
   late final nomeCont = TextEditingController()..text = widget.edituser.nome;
   late final nickNameCont = TextEditingController()
     ..text = widget.edituser.nickName;
+  late final emailCont = TextEditingController()..text = widget.edituser.email;
 
   Uint8List? file;
   late final userController = Provider.of<UserController>(
@@ -72,6 +73,10 @@ class _EditUserState extends State<EditUser> {
                               decoration:
                                   InputDecoration(labelText: 'Nickname'),
                             ),
+                            TextFormField(
+                              controller: emailCont,
+                              decoration: InputDecoration(labelText: 'Email'),
+                            ),
                             const SizedBox(height: 80),
                             Container(
                               padding: EdgeInsets.all(20),
@@ -112,24 +117,40 @@ class _EditUserState extends State<EditUser> {
                               padding: EdgeInsets.all(20),
                               child: ElevatedButton(
                                 onPressed: () async {
+                                  var checkPop = true;
                                   if (_formKey.currentState?.validate() ??
                                       false) {
                                     final user = UserModel(
                                       key: widget.edituser.key,
                                       nome: nomeCont.text,
-                                      email: widget.edituser.email,
+                                      email: emailCont.text,
                                       nickName: nickNameCont.text,
                                       favoritos: widget.edituser.favoritos,
                                       image: file == null
                                           ? widget.edituser.image
                                           : file,
                                     ).toMap();
+                                    try {
+                                      await userController.updateUser(
+                                          emailCont.text, user);
+                                    } on FirebaseException catch (e) {
+                                      var msg = "";
 
-                                    await FirebaseFirestore.instance
-                                        .collection('usuarios')
-                                        .doc(userController.user!.uid)
-                                        .update(user);
-                                    Navigator.pop(context);
+                                      if (e.code == "email-already-in-use") {
+                                        msg =
+                                            "O e-mail fornecido já está em uso por outro usuário";
+                                      } else {
+                                        msg = "Ocorreu um erro";
+                                      }
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(msg),
+                                        ),
+                                      );
+                                      checkPop = false;
+                                    }
+                                    if (checkPop) Navigator.pop(context);
                                   }
                                 },
                                 style: ElevatedButton.styleFrom(
@@ -142,63 +163,57 @@ class _EditUserState extends State<EditUser> {
                               child: TextButton(
                                 onPressed: () async {
                                   showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text("Excluir Conta"),
-                                          content:
-                                              Text("Deseja excluir sua conta?"),
-                                          actions: <Widget>[
-                                            ElevatedButton(
-                                              child: Text('Sim'),
-                                              onPressed: () async {
-                                                await userController.delete();
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text("Excluir Conta"),
+                                        content:
+                                            Text("Deseja excluir sua conta?"),
+                                        actions: <Widget>[
+                                          ElevatedButton(
+                                            child: Text('Sim'),
+                                            onPressed: () async {
+                                              await userController.delete();
 
-                                                showDialog(
-                                                    context: context,
-                                                    builder:
-                                                        (BuildContext context) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            "Conta excluída"),
-                                                        content: Text(
-                                                            "Clique em OK para voltar a página inicial"),
-                                                        actions: <Widget>[
-                                                          ElevatedButton(
-                                                              child: Text('ok'),
-                                                              onPressed: () {
-                                                                Navigator
-                                                                    .pushReplacement(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            SplashPage(),
-                                                                  ),
-                                                                );
-                                                              }),
-                                                        ],
-                                                      );
-                                                    });
-
-                                                // Navigator.pushReplacement(
-                                                //   context,
-                                                //   MaterialPageRoute(
-                                                //     builder: (context) =>
-                                                //         SplashPage(),
-                                                //   ),
-                                                // );
-                                              },
-                                            ),
-                                            ElevatedButton(
-                                              child: Text('Não'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                          ],
-                                        );
-                                      });
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AlertDialog(
+                                                    title:
+                                                        Text("Conta excluída"),
+                                                    content: Text(
+                                                        "Clique em OK para voltar a página inicial"),
+                                                    actions: <Widget>[
+                                                      ElevatedButton(
+                                                        child: Text('ok'),
+                                                        onPressed: () {
+                                                          Navigator
+                                                              .pushReplacement(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                  SplashPage(),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              );
+                                            },
+                                          ),
+                                          ElevatedButton(
+                                            child: Text('Não'),
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 },
                                 child: Text(
                                   "Excluir conta",

@@ -65,4 +65,12 @@ class UserController extends ChangeNotifier {
 
     await user!.delete();
   }
+
+  Future<void> updateUser(String email, Map<String, dynamic> newUser) async {
+    await user!.updateEmail(email);
+    await FirebaseFirestore.instance
+        .collection('usuarios')
+        .doc(user!.uid)
+        .update(newUser);
+  }
 }
