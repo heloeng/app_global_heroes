@@ -20,70 +20,73 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
     return AlertDialog(
       contentPadding: EdgeInsets.all(0),
       backgroundColor: Color(0xff171b22),
-      content: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                  onPressed: () => Navigator.pop(context, 'Cancel'),
-                  icon: FaIcon(FontAwesomeIcons.solidWindowClose)),
-            ],
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Image.network(
-                      widget.hero.image.url,
-                      fit: BoxFit.contain,
-                      height: 280,
-                      errorBuilder: (BuildContext context, Object exception,
-                          StackTrace? stackTrace) {
-                        return Image.asset(
-                          'assets/no-image.jpeg',
-                          height: 280,
-                        );
-                      },
+      content: SingleChildScrollView(
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                    icon: FaIcon(FontAwesomeIcons.solidWindowClose)),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Image.network(
+                        widget.hero.image.url,
+                        fit: BoxFit.contain,
+                        height: 280,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Image.asset(
+                            'assets/no-image.jpeg',
+                            fit: BoxFit.contain,
+                            height: 280,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              PowerstatsWidget(
-                status: 'Poder',
-                valor: widget.hero.powerstats.power,
-                progressoCor: Color(0xffe63946),
-              ),
-              PowerstatsWidget(
-                status: 'Inteligência',
-                valor: widget.hero.powerstats.intelligence,
-                progressoCor: Color(0xff457b9d),
-              ),
-              PowerstatsWidget(
-                status: 'Velocidade',
-                valor: widget.hero.powerstats.speed,
-                progressoCor: Color(0xff2a9d8f),
-              ),
-              PowerstatsWidget(
-                status: 'Força',
-                valor: widget.hero.powerstats.strength,
-                progressoCor: Color(0xff5c4d7d),
-              ),
-              PowerstatsWidget(
-                status: 'Combate',
-                valor: widget.hero.powerstats.combat,
-                progressoCor: Color(0xffee6c4d),
-              ),
-              PowerstatsWidget(
-                status: 'Durabilidade',
-                valor: widget.hero.powerstats.durability,
-                progressoCor: Color(0xfff9c74f),
-              ),
-            ],
-          ),
-        ],
+                  ],
+                ),
+                PowerstatsWidget(
+                  status: 'Poder',
+                  valor: widget.hero.powerstats.power,
+                  progressoCor: Color(0xffe63946),
+                ),
+                PowerstatsWidget(
+                  status: 'Inteligência',
+                  valor: widget.hero.powerstats.intelligence,
+                  progressoCor: Color(0xff457b9d),
+                ),
+                PowerstatsWidget(
+                  status: 'Velocidade',
+                  valor: widget.hero.powerstats.speed,
+                  progressoCor: Color(0xff2a9d8f),
+                ),
+                PowerstatsWidget(
+                  status: 'Força',
+                  valor: widget.hero.powerstats.strength,
+                  progressoCor: Color(0xff5c4d7d),
+                ),
+                PowerstatsWidget(
+                  status: 'Combate',
+                  valor: widget.hero.powerstats.combat,
+                  progressoCor: Color(0xffee6c4d),
+                ),
+                PowerstatsWidget(
+                  status: 'Durabilidade',
+                  valor: widget.hero.powerstats.durability,
+                  progressoCor: Color(0xfff9c74f),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       actions: [],
     );
