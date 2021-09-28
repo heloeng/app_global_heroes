@@ -1,8 +1,10 @@
 // ignore: unused_import
 import 'dart:typed_data';
+import 'dart:ui';
 import 'package:app_global_heroes/pages/edit_user_page.dart';
 import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../controllers/user_controller.dart';
 // ignore: unused_import
 import '../models/user_model.dart';
@@ -47,7 +49,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         // color: Color(0xFF1E392A),
                         image: DecorationImage(
                             image: AssetImage(
-                              "assets/giphy4.gif",
+                              "assets/gif.gif",
                             ),
                             fit: BoxFit.fill)),
                     currentAccountPicture: CircleAvatar(
@@ -57,11 +59,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               width: 144, height: 144, fit: BoxFit.cover)
                           : Icon(Icons.person),
                     )),
-                    accountName: Text(user!.nome),
-                    accountEmail: Text(user!.email),
+                    accountName: Text(user!.nome,
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+                    accountEmail: Text(user!.email,
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
                   );
                 }),
             ListTile(
+                hoverColor: (Color(0xffd17842)),
                 title: Text("Favoritos"),
                 leading: FaIcon(
                   FontAwesomeIcons.solidStar,
@@ -72,6 +81,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                       MaterialPageRoute(builder: (context) => FavoritosPage()));
                 }),
             ListTile(
+                hoverColor: (Color(0xffd17842)),
                 title: Text("Editar Usuário"),
                 leading: FaIcon(
                   FontAwesomeIcons.userAlt,
@@ -86,6 +96,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                               )));
                 }),
             ListTile(
+              hoverColor: (Color(0xffd17842)),
               title: Text('Sair'),
               leading: FaIcon(
                 FontAwesomeIcons.signOutAlt,
@@ -98,23 +109,30 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Sign Out'),
+                        title: Text('Sign Out', style: GoogleFonts.blackOpsOne(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFFFB6C34),
+                                  ),
+                                ),),
                         content: Text('Deseja sair da conta?'),
                         actions: <Widget>[
                           ElevatedButton(
-                            child: Text('Sim'),
+                            child: Text('Sim',style: TextStyle(color: Colors.black),),
                             onPressed: () async {
                               await userController.logout();
                               Navigator.of(context).pop();
                             },
+                             style: ElevatedButton.styleFrom(
+                                  primary: Color(0xFFcc0000)),
                           ),
                           ElevatedButton(
-                            // color: Colors.blueAccent,
-                            // child: Text('Não', style: TextStyle(color: Colors.white),),
                             child: Text('Não'),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
+                             style: ElevatedButton.styleFrom(
+                                  primary: Color(0xffd17842)),
                           ),
                         ],
                       );

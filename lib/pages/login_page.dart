@@ -1,3 +1,5 @@
+import 'package:google_fonts/google_fonts.dart';
+
 import '../controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -46,18 +48,22 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.mail_outline,
+                                  color: Color(0xffd17842),
                                 ),
                                 labelText: 'Email'),
                             onChanged: (texto) => email = texto,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
-                                prefixIcon:
-                                    Icon(Icons.enhanced_encryption_outlined),
+                                prefixIcon: Icon(
+                                  Icons.enhanced_encryption_outlined,
+                                  color: Color(0xffd17842),
+                                ),
                                 labelText: 'Senha'),
                             obscureText: true,
                             onChanged: (texto) => senha = texto,
                           ),
+                          const SizedBox(height: 15),
                           Container(
                             margin: EdgeInsets.only(top: 30),
                             child: ElevatedButton(
@@ -78,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                                   } else if (e.code ==
                                       "operation-not-allowed") {
                                     msg =
-                                        "Login com Email e senha não está habilitado.";
+                                        "Login com Email e senha não está habilitado";
                                   } else {
                                     msg = "Ocorreu um erro";
                                   }
@@ -94,8 +100,11 @@ class _LoginPageState extends State<LoginPage> {
                                 margin: EdgeInsets.symmetric(horizontal: 30),
                                 child: Text("Login"),
                               ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xffd17842)),
                             ),
                           ),
+                          const SizedBox(height: 15),
                           Container(
                             margin: EdgeInsets.only(top: 15),
                             child: OutlinedButton(
@@ -107,7 +116,51 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 );
                               },
-                              child: Text("Cadastrar"),
+                              child: Text(
+                                "Cadastrar",
+                                style: GoogleFonts.blackOpsOne(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFFFB6C34),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15),
+                            child: OutlinedButton(
+                              onPressed: () async {
+                                try {
+                                  await userController.updateSenha(
+                                      email, context);
+                                } on FirebaseAuthException catch (e) {
+                                  print(e);
+                                  var msg = "";
+                                  if (e.code == "invalid-email") {
+                                    msg = "Email inválido";
+                                  } else if (e.code == "user-not-found") {
+                                    msg = "Usuário não cadastrado";
+                                  } else {
+                                    msg = "Ocorreu um erro";
+                                    print(msg);
+                                  }
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(msg),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: Text(
+                                "Esqueci a senha",
+                                style: GoogleFonts.blackOpsOne(
+                                  textStyle: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(0xFFFB6C34),
+                                  ),
+                                ),
+                              ),
                             ),
                           ),
                         ],
