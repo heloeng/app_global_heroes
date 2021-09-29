@@ -30,18 +30,6 @@ class _SignupPageState extends State<SignupPage> {
   bool obscureTextPassword = true;
   bool obscureTextConfirmPassword = true;
 
-  void changeVisibilityPassword() {
-    setState(() {
-      obscureTextPassword = !obscureTextPassword;
-    });
-  }
-
-  void changeVisibilityConfirmPassword() {
-    setState(() {
-      obscureTextConfirmPassword = !obscureTextConfirmPassword;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     // Cria o widget Form usando  _formKey
@@ -128,7 +116,12 @@ class _SignupPageState extends State<SignupPage> {
                                   color: Color(0xffd17842),
                                 ),
                                 suffixIcon: IconButton(
-                                  onPressed: changeVisibilityPassword,
+                                  onPressed: () {
+                                    setState(() {
+                                      obscureTextPassword =
+                                          !obscureTextPassword;
+                                    });
+                                  },
                                   icon: obscureTextPassword
                                       ? Icon(Icons.visibility_off)
                                       : Icon(Icons.visibility),
@@ -152,7 +145,12 @@ class _SignupPageState extends State<SignupPage> {
                                     color: Color(0xffd17842),
                                   ),
                                   suffixIcon: IconButton(
-                                    onPressed: changeVisibilityConfirmPassword,
+                                    onPressed: () {
+                                      setState(() {
+                                        obscureTextConfirmPassword =
+                                            !obscureTextConfirmPassword;
+                                      });
+                                    },
                                     icon: obscureTextConfirmPassword
                                         ? Icon(Icons.visibility_off)
                                         : Icon(Icons.visibility),
