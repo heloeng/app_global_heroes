@@ -1,11 +1,8 @@
 import 'dart:convert';
-
-//import 'package:app_global_heroes/models/heroe_model.dart';
 import 'package:app_global_heroes/models/search_result_model.dart';
 import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:animate_do/animate_do.dart';
 import 'package:animated_card/animated_card.dart';
 
 class GetHeroesWidget extends StatefulWidget {
