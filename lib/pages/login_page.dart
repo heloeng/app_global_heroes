@@ -24,12 +24,6 @@ class _LoginPageState extends State<LoginPage> {
 
   bool obscureTextPassword = true;
 
-  void changeVisibilityPassword() {
-    setState(() {
-      obscureTextPassword = !obscureTextPassword;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +62,12 @@ class _LoginPageState extends State<LoginPage> {
                                   color: Color(0xffd17842),
                                 ),
                                 suffixIcon: IconButton(
-                                  onPressed: changeVisibilityPassword,
+                                  onPressed: () {
+                                    setState(() {
+                                      obscureTextPassword =
+                                          !obscureTextPassword;
+                                    });
+                                  },
                                   icon: obscureTextPassword
                                       ? Icon(Icons.visibility_off)
                                       : Icon(Icons.visibility),
