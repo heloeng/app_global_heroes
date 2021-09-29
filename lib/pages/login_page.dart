@@ -85,7 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                                   await userController.login(email, senha);
                                 } on FirebaseAuthException catch (e) {
                                   var msg = "";
-                                  print(e);
 
                                   if (e.code == "wrong-password") {
                                     msg = "A senha está incorreta";
@@ -157,7 +156,6 @@ class _LoginPageState extends State<LoginPage> {
                                     msg = "Usuário não cadastrado";
                                   } else {
                                     msg = "Informe seu email de cadastro";
-                                    print(msg);
                                   }
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
