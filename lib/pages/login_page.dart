@@ -99,8 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                                     msg =
                                         "Login com email e senha não está habilitado";
                                   } else {
-                                    msg =
-                                        "Informe seu email e senha de cadastro";
+                                    msg = "Ocorreu um erro";
                                   }
 
                                   ScaffoldMessenger.of(context).showSnackBar(
@@ -156,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                                     msg = "Usuário não cadastrado";
                                   } else {
                                     msg = "Informe seu email de cadastro";
+                                    print(msg);
                                   }
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
