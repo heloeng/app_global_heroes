@@ -69,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                                     });
                                   },
                                   icon: obscureTextPassword
-                                      ? Icon(Icons.visibility_off)
-                                      : Icon(Icons.visibility),
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
                                 ),
                                 labelText: 'Senha'),
                             obscureText: obscureTextPassword,

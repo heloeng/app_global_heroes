@@ -37,7 +37,7 @@ class _SignupPageState extends State<SignupPage> {
           Expanded(
             child: Container(
               color: Colors.black87,
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -121,8 +121,8 @@ class _SignupPageState extends State<SignupPage> {
                                     });
                                   },
                                   icon: obscureTextPassword
-                                      ? Icon(Icons.visibility_off)
-                                      : Icon(Icons.visibility),
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
                                 ),
                                 labelText: 'Senha',
                               ),
@@ -150,8 +150,8 @@ class _SignupPageState extends State<SignupPage> {
                                       });
                                     },
                                     icon: obscureTextConfirmPassword
-                                        ? Icon(Icons.visibility_off)
-                                        : Icon(Icons.visibility),
+                                        ? Icon(Icons.visibility)
+                                        : Icon(Icons.visibility_off),
                                   ),
                                   labelText: 'Confirmar Senha'),
                               onChanged: (texto) => confirmarSenha = texto,
