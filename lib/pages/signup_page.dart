@@ -192,7 +192,7 @@ class _SignupPageState extends State<SignupPage> {
 
                                       if (e.code == "email-already-in-use") {
                                         msg =
-                                            "O e-mail fornecido já está em uso por outro usuário";
+                                            "O email fornecido já está em uso por outro usuário";
                                       } else {
                                         msg = "Ocorreu um erro";
                                       }
