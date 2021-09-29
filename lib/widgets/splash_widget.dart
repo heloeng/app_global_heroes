@@ -13,13 +13,17 @@ class _SplashWidgetState extends State<SplashWidget> {
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 3), () {
-      Navigator.push(
+    Timer(
+      Duration(seconds: 3),
+      () {
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => SplashPage(),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 
   @override

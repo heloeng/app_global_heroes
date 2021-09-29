@@ -1,12 +1,9 @@
-// ignore: unused_import
-import 'dart:typed_data';
 import 'dart:ui';
 import 'package:app_global_heroes/pages/edit_user_page.dart';
 import 'package:app_global_heroes/pages/favoritos_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../controllers/user_controller.dart';
-// ignore: unused_import
 import '../models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -106,37 +103,44 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                 // await userController.logout();
 
                 showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Sign Out', style: GoogleFonts.blackOpsOne(
-                                  textStyle: TextStyle(
-                                    fontSize: 20,
-                                    color: Color(0xFFFB6C34),
-                                  ),
-                                ),),
-                        content: Text('Deseja sair da conta?'),
-                        actions: <Widget>[
-                          ElevatedButton(
-                            child: Text('Sim',style: TextStyle(color: Colors.black),),
-                            onPressed: () async {
-                              await userController.logout();
-                              Navigator.of(context).pop();
-                            },
-                             style: ElevatedButton.styleFrom(
-                                  primary: Color(0xFFcc0000)),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Sign Out',
+                        style: GoogleFonts.blackOpsOne(
+                          textStyle: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xFFFB6C34),
                           ),
-                          ElevatedButton(
-                            child: Text('Não'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                             style: ElevatedButton.styleFrom(
-                                  primary: Color(0xffd17842)),
+                        ),
+                      ),
+                      content: Text('Deseja sair da conta?'),
+                      actions: <Widget>[
+                        ElevatedButton(
+                          child: Text(
+                            'Sim',
+                            style: TextStyle(color: Colors.black),
                           ),
-                        ],
-                      );
-                    });
+                          onPressed: () async {
+                            await userController.logout();
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFcc0000)),
+                        ),
+                        ElevatedButton(
+                          child: Text('Não'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xffd17842)),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
             ),
           ],

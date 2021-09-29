@@ -27,8 +27,9 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    icon: FaIcon(FontAwesomeIcons.solidWindowClose)),
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  icon: FaIcon(FontAwesomeIcons.solidWindowClose),
+                ),
               ],
             ),
             Column(

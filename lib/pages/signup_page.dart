@@ -7,7 +7,6 @@ import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
 
-// Define  um widget Form customizado
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -32,7 +31,6 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Cria o widget Form usando  _formKey
     return Scaffold(
       body: Column(
         children: [

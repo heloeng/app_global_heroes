@@ -70,10 +70,8 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                       var hero = snapshot.data!.results[index];
 
                       return AnimatedCard(
-                        direction: AnimatedCardDirection
-                            .right, //Initial animation direction
-                        initDelay: Duration(
-                            milliseconds: 500), //Delay to initial animation
+                        direction: AnimatedCardDirection.right,
+                        initDelay: Duration(milliseconds: 500),
                         duration: Duration(milliseconds: 1000),
                         child: CardHeroes(
                           screenHeight: MediaQuery.of(context).size.height,
