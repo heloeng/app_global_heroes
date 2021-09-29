@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:animated_card/animated_card.dart';
 import 'package:app_global_heroes/controllers/user_controller.dart';
-import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:app_global_heroes/models/hero_model.dart';
 import 'package:app_global_heroes/models/user_model.dart';
 import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,12 +25,12 @@ class _FavoritosPageState extends State<FavoritosPage> {
     listen: false,
   );
 
-  Future<Heroe> fetch(heroId) async {
+  Future<HeroModel> fetch(heroId) async {
     var url = Uri.parse(
         'https://www.superheroapi.com/api.php/2341455595984511/$heroId');
     final response = await http.get(url);
 
-    Heroe heroes = Heroe.fromJson(jsonDecode(response.body));
+    HeroModel heroes = HeroModel.fromJson(jsonDecode(response.body));
     return heroes;
   }
 
@@ -70,7 +70,7 @@ class _FavoritosPageState extends State<FavoritosPage> {
               itemCount: user!.favoritos!.length,
               itemBuilder: (context, index) {
                 late final favorito = user!.favoritos![index];
-                return FutureBuilder<Heroe>(
+                return FutureBuilder<HeroModel>(
                   future: fetch(favorito),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -79,7 +79,7 @@ class _FavoritosPageState extends State<FavoritosPage> {
                       );
                     }
                     if (snapshot.hasData) {
-                      final Heroe hero = snapshot.data!;
+                      final HeroModel hero = snapshot.data!;
                       return AnimatedCard(
                         direction: AnimatedCardDirection
                             .right, //Initial animation direction

@@ -67,7 +67,7 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                   return ListView.builder(
                     itemCount: snapshot.data!.results.length,
                     itemBuilder: (context, index) {
-                      var heroe = snapshot.data!.results[index];
+                      var hero = snapshot.data!.results[index];
 
                       return AnimatedCard(
                         direction: AnimatedCardDirection
@@ -77,11 +77,11 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                         duration: Duration(milliseconds: 1000),
                         child: CardHeroes(
                           screenHeight: MediaQuery.of(context).size.height,
-                          fotoUrl: heroe.image.url,
-                          id: heroe.id,
-                          name: heroe.name,
-                          fullName: heroe.biography.fullName,
-                          hero: heroe,
+                          fotoUrl: hero.image.url,
+                          id: hero.id,
+                          name: hero.name,
+                          fullName: hero.biography.fullName,
+                          hero: hero,
                         ),
                       );
                     },

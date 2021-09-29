@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:app_global_heroes/controllers/user_controller.dart';
-import 'package:app_global_heroes/models/heroe_model.dart';
-import 'package:app_global_heroes/models/user_model.dart';
+import '../controllers/user_controller.dart';
+import '../models/hero_model.dart';
+import '../models/user_model.dart';
 
 class FavoritoWidget extends StatefulWidget {
-  final Heroe hero;
+  final HeroModel hero;
 
   const FavoritoWidget({
     required this.hero,
