@@ -192,7 +192,7 @@ class _SignupPageState extends State<SignupPage> {
                                         msg =
                                             "O email fornecido já está em uso por outro usuário";
                                       } else {
-                                        msg = "Ocorreu um erro";
+                                        msg = "Ocorreu um erro inesperado";
                                       }
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
