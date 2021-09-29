@@ -24,31 +24,36 @@ class _FavoritoWidgetState extends State<FavoritoWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('usuarios')
-            .where('key', isEqualTo: userController.user!.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          snapshot.data!.docs.forEach((element) {
-            user = UserModel.fromMap(element.data());
-          });
-
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: FaIcon(
-              user!.favoritos!.contains(widget.hero.id)
-                  ? FontAwesomeIcons.solidStar
-                  : FontAwesomeIcons.star,
-              size: 20,
-              color: Color(0xff171b22),
-            ),
+      stream: FirebaseFirestore.instance
+          .collection('usuarios')
+          .where('key', isEqualTo: userController.user!.uid)
+          .snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        });
+        }
+
+        snapshot.data!.docs.forEach(
+          (element) {
+            user = UserModel.fromMap(
+              element.data(),
+            );
+          },
+        );
+
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FaIcon(
+            user!.favoritos!.contains(widget.hero.id)
+                ? FontAwesomeIcons.solidStar
+                : FontAwesomeIcons.star,
+            size: 20,
+            color: Color(0xff171b22),
+          ),
+        );
+      },
+    );
   }
 }

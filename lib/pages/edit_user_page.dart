@@ -10,7 +10,6 @@ import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'package:file_picker/file_picker.dart';
 
-// Define  um widget Form customizado
 class EditUser extends StatefulWidget {
   final UserModel edituser;
 

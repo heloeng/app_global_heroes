@@ -128,10 +128,7 @@ class CardHeroes extends StatelessWidget {
                                 color: Color(0xffd17842),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              // child: FavoritoWiget(hero: hero),
                               child: InkWell(
-                                //Esse onTap realiza a requisição ao Firebase dos dados do usuário logado, adiciona à lista de favoritos
-                                //o ID do herói e atualiza a lista de favoritos no banco de dados
                                 onTap: () async {
                                   final usuario = await FirebaseFirestore
                                       .instance
