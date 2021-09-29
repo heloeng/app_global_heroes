@@ -4,7 +4,7 @@ import 'package:app_global_heroes/models/user_model.dart';
 import 'package:app_global_heroes/widgets/favorito_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:app_global_heroes/models/hero_model.dart';
 import 'package:provider/provider.dart';
 import 'hero_details_widget.dart';
 
@@ -24,7 +24,7 @@ class CardHeroes extends StatelessWidget {
   final String name;
   final String fullName;
   final String id;
-  final Heroe hero;
+  final HeroModel hero;
 
   @override
   Widget build(BuildContext context) {

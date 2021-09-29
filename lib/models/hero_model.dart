@@ -1,12 +1,12 @@
-import 'package:app_global_heroes/models/powerstats_model.dart';
-import 'package:app_global_heroes/models/work_model.dart';
+import 'powerstats_model.dart';
+import 'work_model.dart';
 
 import 'appearance_model.dart';
 import 'biography.dart';
 import 'connections_model.dart';
 import 'image_model.dart';
 
-class Heroe {
+class HeroModel {
   late String id;
   late String name;
   late Powerstats powerstats;
@@ -16,7 +16,7 @@ class Heroe {
   late Connections connections;
   late Image image;
 
-  Heroe(
+  HeroModel(
       {required this.id,
       required this.name,
       required this.powerstats,
@@ -26,7 +26,7 @@ class Heroe {
       required this.connections,
       required this.image});
 
-  Heroe.fromJson(Map<String, dynamic> json) {
+  HeroModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     powerstats = (json['powerstats'] != null
