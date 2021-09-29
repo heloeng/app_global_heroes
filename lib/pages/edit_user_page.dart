@@ -138,9 +138,10 @@ class _EditUserState extends State<EditUser> {
 
                                       if (e.code == "email-already-in-use") {
                                         msg =
-                                            "O e-mail fornecido já está em uso por outro usuário";
+                                            "O email fornecido já está em uso por outro usuário";
                                       } else {
-                                        msg = "Ocorreu um erro";
+                                        msg =
+                                            "Informe um email válido para alteração";
                                       }
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                                   } else if (e.code ==
                                       "operation-not-allowed") {
                                     msg =
-                                        "Login com Email e senha não está habilitado";
+                                        "Login com email e senha não está habilitado";
                                   } else {
                                     msg = "Ocorreu um erro";
                                   }
@@ -149,14 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                                   await userController.updateSenha(
                                       email, context);
                                 } on FirebaseAuthException catch (e) {
-                                  print(e);
                                   var msg = "";
                                   if (e.code == "invalid-email") {
                                     msg = "Email inválido";
                                   } else if (e.code == "user-not-found") {
                                     msg = "Usuário não cadastrado";
                                   } else {
-                                    msg = "Ocorreu um erro";
+                                    msg = "Informe seu email de cadastro";
                                     print(msg);
                                   }
                                   ScaffoldMessenger.of(context).showSnackBar(
