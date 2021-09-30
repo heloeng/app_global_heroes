@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 
 class FavoritosPage extends StatefulWidget {
   const FavoritosPage({Key? key}) : super(key: key);
@@ -68,60 +67,41 @@ class _FavoritosPageState extends State<FavoritosPage> {
           return Container(
             color: Colors.black87,
             child: ListView.builder(
-              itemCount:
-                  user!.favoritos!.length == 0 ? 1 : user!.favoritos!.length,
+              itemCount: user!.favoritos!.length,
               itemBuilder: (context, index) {
                 late final favorito = user!.favoritos![index];
-                return user!.favoritos!.length < 1
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 100),
-                            child: Text(
-                              'Você não possui favoritos',
-                              style: TextStyle(fontSize: 22),
-                            ),
-                          ),
-                          Center(
-                            child: Lottie.asset('assets/favoritos.json'),
-                          ),
-                        ],
-                      )
-                    : FutureBuilder<HeroModel>(
-                        future: fetch(favorito),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return Center(
-                              child: Text('Erro ao carregar os heróis.'),
-                            );
-                          }
-                          if (snapshot.hasData) {
-                            final HeroModel hero = snapshot.data!;
-                            return AnimatedCard(
-                              direction: AnimatedCardDirection
-                                  .right, //Initial animation direction
-                              initDelay: Duration(
-                                  milliseconds:
-                                      500), //Delay to initial animation
-                              duration: Duration(milliseconds: 1000),
-                              child: CardHeroes(
-                                screenHeight:
-                                    MediaQuery.of(context).size.height,
-                                fotoUrl: hero.image.url,
-                                id: hero.id,
-                                name: hero.name,
-                                fullName: hero.biography.fullName,
-                                hero: hero,
-                              ),
-                            );
-                          }
-
-                          return Center(
-                            child: Text(""),
-                          );
-                        },
+                return FutureBuilder<HeroModel>(
+                  future: fetch(favorito),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Center(
+                        child: Text('Erro ao carregar os heróis.'),
                       );
+                    }
+                    if (snapshot.hasData) {
+                      final HeroModel hero = snapshot.data!;
+                      return AnimatedCard(
+                        direction: AnimatedCardDirection
+                            .right, //Initial animation direction
+                        initDelay: Duration(
+                            milliseconds: 500), //Delay to initial animation
+                        duration: Duration(milliseconds: 1000),
+                        child: CardHeroes(
+                          screenHeight: MediaQuery.of(context).size.height,
+                          fotoUrl: hero.image.url,
+                          id: hero.id,
+                          name: hero.name,
+                          fullName: hero.biography.fullName,
+                          hero: hero,
+                        ),
+                      );
+                    }
+
+                    return Center(
+                      child: Text(""),
+                    );
+                  },
+                );
               },
             ),
           );
