@@ -1,11 +1,8 @@
 import 'dart:convert';
-
-//import 'package:app_global_heroes/models/heroe_model.dart';
 import 'package:app_global_heroes/models/search_result_model.dart';
 import 'package:app_global_heroes/widgets/cardsHeroes_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:animate_do/animate_do.dart';
 import 'package:animated_card/animated_card.dart';
 
 class GetHeroesWidget extends StatefulWidget {
@@ -70,21 +67,19 @@ class _GetHeroesWidgetState extends State<GetHeroesWidget> {
                   return ListView.builder(
                     itemCount: snapshot.data!.results.length,
                     itemBuilder: (context, index) {
-                      var heroe = snapshot.data!.results[index];
+                      var hero = snapshot.data!.results[index];
 
                       return AnimatedCard(
-                        direction: AnimatedCardDirection
-                            .right, //Initial animation direction
-                        initDelay: Duration(
-                            milliseconds: 500), //Delay to initial animation
+                        direction: AnimatedCardDirection.right,
+                        initDelay: Duration(milliseconds: 500),
                         duration: Duration(milliseconds: 1000),
                         child: CardHeroes(
                           screenHeight: MediaQuery.of(context).size.height,
-                          fotoUrl: heroe.image.url,
-                          id: heroe.id,
-                          name: heroe.name,
-                          fullName: heroe.biography.fullName,
-                          hero: heroe,
+                          fotoUrl: hero.image.url,
+                          id: hero.id,
+                          name: hero.name,
+                          fullName: hero.biography.fullName,
+                          hero: hero,
                         ),
                       );
                     },

@@ -2,10 +2,10 @@ import 'package:app_global_heroes/widgets/powerstats_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:app_global_heroes/models/heroe_model.dart';
+import 'package:app_global_heroes/models/hero_model.dart';
 
 class HeroDetailsWidget extends StatefulWidget {
-  final Heroe hero;
+  final HeroModel hero;
   HeroDetailsWidget({
     required this.hero,
   });
@@ -27,8 +27,9 @@ class _HeroDetailsWidgetState extends State<HeroDetailsWidget> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                    onPressed: () => Navigator.pop(context, 'Cancel'),
-                    icon: FaIcon(FontAwesomeIcons.solidWindowClose)),
+                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                  icon: FaIcon(FontAwesomeIcons.solidWindowClose),
+                ),
               ],
             ),
             Column(

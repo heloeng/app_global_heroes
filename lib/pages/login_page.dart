@@ -69,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                                     });
                                   },
                                   icon: obscureTextPassword
-                                      ? Icon(Icons.visibility_off)
-                                      : Icon(Icons.visibility),
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
                                 ),
                                 labelText: 'Senha'),
                             obscureText: obscureTextPassword,
@@ -99,7 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                                     msg =
                                         "Login com email e senha não está habilitado";
                                   } else {
-                                    msg = "Ocorreu um erro";
+                                    msg =
+                                        "Informe seu email e senha de cadastro";
                                   }
 
                                   ScaffoldMessenger.of(context).showSnackBar(

@@ -7,7 +7,6 @@ import '../models/user_model.dart';
 import '../controllers/user_controller.dart';
 import 'login_page.dart';
 
-// Define  um widget Form customizado
 class SignupPage extends StatefulWidget {
   @override
   _SignupPageState createState() => _SignupPageState();
@@ -32,14 +31,13 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Cria o widget Form usando  _formKey
     return Scaffold(
       body: Column(
         children: [
           Expanded(
             child: Container(
               color: Colors.black87,
-              padding: EdgeInsets.all(30),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -123,8 +121,8 @@ class _SignupPageState extends State<SignupPage> {
                                     });
                                   },
                                   icon: obscureTextPassword
-                                      ? Icon(Icons.visibility_off)
-                                      : Icon(Icons.visibility),
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
                                 ),
                                 labelText: 'Senha',
                               ),
@@ -152,8 +150,8 @@ class _SignupPageState extends State<SignupPage> {
                                       });
                                     },
                                     icon: obscureTextConfirmPassword
-                                        ? Icon(Icons.visibility_off)
-                                        : Icon(Icons.visibility),
+                                        ? Icon(Icons.visibility)
+                                        : Icon(Icons.visibility_off),
                                   ),
                                   labelText: 'Confirmar Senha'),
                               onChanged: (texto) => confirmarSenha = texto,
@@ -192,7 +190,7 @@ class _SignupPageState extends State<SignupPage> {
                                         msg =
                                             "O email fornecido já está em uso por outro usuário";
                                       } else {
-                                        msg = "Ocorreu um erro";
+                                        msg = "Ocorreu um erro inesperado";
                                       }
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(

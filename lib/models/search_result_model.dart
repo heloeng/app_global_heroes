@@ -1,9 +1,9 @@
-import 'heroe_model.dart';
+import 'hero_model.dart';
 
 class SearchResult {
   late String response;
   late String resultsFor;
-  late List<Heroe> results;
+  late List<HeroModel> results;
 
   SearchResult(
       {required this.response,
@@ -16,7 +16,7 @@ class SearchResult {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results.add(new Heroe.fromJson(v));
+        results.add(new HeroModel.fromJson(v));
       });
     }
   }
